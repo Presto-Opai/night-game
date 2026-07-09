@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Tableau de bord — Objectif 40 000 €</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a1428;
+            --navy-light: #1a2c52;
+            --gold: #d4af37;
+            --gold-light: #e8c547;
+            --text: #e8e8e8;
+            --text-muted: #b8b8b8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d1f3c 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, #fff, rgba(255, 255, 255, 0.2)),
+                radial-gradient(2px 2px at 60% 70%, #fff, rgba(255, 255, 255, 0.1)),
+                radial-gradient(1px 1px at 50% 50%, #fff, rgba(255, 255, 255, 0.15)),
+                radial-gradient(1px 1px at 80% 10%, #fff, rgba(255, 255, 255, 0.1)),
+                radial-gradient(2px 2px at 90% 60%, #fff, rgba(255, 255, 255, 0.2));
+            background-repeat: repeat;
+            background-size: 200% 200%, 150% 150%, 250% 250%, 180% 180%, 220% 220%;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 3rem 1.5rem 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 44, 82, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(26, 44, 82, 0.8);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+        }
+
+        .card h2 {
+            color: var(--gold-light);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--gold);
+            color: var(--navy);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+
+        .btn:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .card-status {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-links-section {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .card-links-section a {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .card-links-section a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            header {
+                padding: 2rem 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord — Objectif 40 000 €</h1>
+        <p class="intro">Accès rapide aux trois pistes de développement.</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Piste 1 — Bocage Web</h2>
+            <p class="card-description">Sites locaux : création et refonte de sites commerciaux pour petites et moyennes entreprises.</p>
+            <div class="card-links">
+                <a href="agency/" class="btn">Vitrine commerciale</a>
+                <a href="demos/" class="btn btn-secondary">Démos clients</a>
+            </div>
+            <p class="card-links-section">
+                <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN.md">Consulter le plan</a>
+            </p>
+            <span class="card-status">Prêt à vendre</span>
+        </div>
+
+        <div class="card">
+            <h2>Piste 2 — Mots d'Orne</h2>
+            <p class="card-description">Rédaction SEO : création de contenu optimisé pour le référencement naturel et l'engagement.</p>
+            <div class="card-links">
+                <a href="redaction/index.html" class="btn">Page d'offre</a>
+                <a href="redaction/studio.html" class="btn btn-secondary">Studio SEO</a>
+            </div>
+            <p class="card-links-section">
+                <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN-REDACTION.md">Consulter le plan</a>
+            </p>
+            <span class="card-status">Prêt à vendre</span>
+        </div>
+
+        <div class="card">
+            <h2>Piste 3 — La Carte de Votre Ciel</h2>
+            <p class="card-description">Posters personnalisés : générateur de cartes du ciel pour les moments précieux.</p>
+            <div class="card-links">
+                <a href="etoiles/" class="btn">Générateur de cartes</a>
+            </div>
+            <p class="card-links-section">
+                <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN-ETOILES.md">Consulter le plan</a>
+            </p>
+            <span class="card-status">Prêt à vendre</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>Guide de mise en ligne et d'encaissement&#160;: <a href="https://github.com/Presto-Opai/night-game/blob/main/DEPLOY.md">DEPLOY.md</a></p>
+    </footer>
+</body>
+</html>

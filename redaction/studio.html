@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio SEO — Outil de rédaction (Mots d'Orne)</title>
+<meta name="description" content="Studio SEO&nbsp;: outil local et privé pour préparer des briefs de rédaction, analyser la lisibilité et le SEO d'un texte, et optimiser les métadonnées. Rien n'est envoyé sur internet.">
+<style>
+  :root{
+    --paper:#f6f1e4;
+    --paper-alt:#ece2cc;
+    --paper-deep:#e4d7ba;
+    --ink:#231f1a;
+    --ink-soft:#4a443b;
+    --accent:#1d3b37;
+    --accent-light:#2f5952;
+    --accent-2:#a8462f;
+    --accent-2-light:#c96246;
+    --line:#c9bb9a;
+    --radius:4px;
+    --good:#2f6d3c;
+    --warn:#a8752f;
+    --bad:#a3352b;
+    --na:#8b8272;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper-deep);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:var(--serif);
+    font-weight:600;
+    color:var(--ink);
+    margin:0 0 .5em;
+    line-height:1.25;
+  }
+  p{margin:0 0 .8em;}
+  label{display:block; font-size:.82rem; font-weight:600; color:var(--ink-soft); margin-bottom:.3rem;}
+  input[type="text"], input[type="search"], textarea, select{
+    width:100%;
+    font-family:var(--sans);
+    font-size:.95rem;
+    padding:.6rem .7rem;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:#fffdf8;
+    color:var(--ink);
+  }
+  input:focus, textarea:focus, select:focus, button:focus{
+    outline:2px solid var(--accent-2);
+    outline-offset:1px;
+  }
+  textarea{resize:vertical; font-family:var(--sans);}
+  .field{margin-bottom:1.1rem;}
+  .field-hint{font-size:.78rem; color:var(--ink-soft); margin-top:.3rem;}
+
+  button{
+    font-family:var(--sans);
+    cursor:pointer;
+  }
+  .btn{
+    display:inline-block;
+    padding:.65rem 1.2rem;
+    border-radius:var(--radius);
+    border:1px solid var(--accent);
+    background:var(--accent);
+    color:var(--paper);
+    font-size:.9rem;
+    font-weight:600;
+  }
+  .btn:hover, .btn:focus{background:var(--accent-light);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+  .btn-secondary:hover, .btn-secondary:focus{background:var(--accent); color:var(--paper);}
+  .btn-small{padding:.35rem .7rem; font-size:.8rem;}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  a.skip-link{
+    position:absolute; left:-999px; top:0;
+    background:var(--accent); color:var(--paper);
+    padding:.6rem 1rem; z-index:20;
+  }
+  a.skip-link:focus{left:1rem; top:1rem;}
+
+  /* --- App shell --- */
+  .app-header{
+    background:var(--accent);
+    color:var(--paper);
+    padding:1rem 1.25rem;
+  }
+  .app-header .header-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:.5rem;
+  }
+  .app-header .brand{
+    font-family:var(--serif);
+    font-size:1.2rem;
+    font-weight:700;
+  }
+  .app-header .tagline{
+    font-size:.8rem;
+    color:#d7cbaf;
+  }
+  .app-header .privacy-flag{
+    font-size:.72rem;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    padding:.25rem .6rem;
+    border-radius:2px;
+    color:var(--paper);
+  }
+
+  .tabs{
+    display:flex;
+    gap:.25rem;
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 1.25rem;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:5;
+    overflow-x:auto;
+  }
+  .tab-btn{
+    background:transparent;
+    border:none;
+    border-bottom:3px solid transparent;
+    padding:.9rem 1rem;
+    font-size:.92rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .tab-btn[aria-selected="true"]{
+    color:var(--accent);
+    border-bottom-color:var(--accent-2);
+  }
+  .tab-btn:hover{color:var(--accent);}
+
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:1.75rem 1.25rem 4rem;
+  }
+  .panel-intro{
+    max-width:70ch;
+    color:var(--ink-soft);
+    margin-bottom:1.75rem;
+  }
+
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.5rem;
+  }
+  .card + .card{margin-top:1.5rem;}
+  .card h2{font-size:1.15rem;}
+  .card h3{font-size:1rem; margin-top:1.4rem;}
+
+  .grid-2{
+    display:grid;
+    gap:1.25rem;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:800px){
+    .grid-2{grid-template-columns:1fr 1fr;}
+  }
+
+  .layout-analyse, .layout-brief{
+    display:grid;
+    gap:1.5rem;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:960px){
+    .layout-analyse, .layout-brief{grid-template-columns:1.1fr .9fr;}
+  }
+
+  /* --- Plan rows --- */
+  #plan-rows{margin-bottom:.75rem;}
+  .plan-row{
+    display:grid;
+    grid-template-columns:5rem 1fr auto;
+    gap:.5rem;
+    margin-bottom:.5rem;
+    align-items:center;
+  }
+  .plan-row select{padding:.5rem .4rem;}
+  .plan-remove{
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    width:2.2rem;
+    height:2.2rem;
+    font-size:1rem;
+    color:var(--bad);
+    line-height:1;
+  }
+  .plan-remove:hover{background:var(--bad); color:#fff; border-color:var(--bad);}
+
+  /* --- Brief preview / print --- */
+  .brief-preview{
+    background:#fffdf8;
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    padding:1.5rem;
+    min-height:8rem;
+  }
+  .brief-preview .print-empty{color:var(--ink-soft); font-style:italic;}
+  .brief-preview .print-subtitle{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    color:var(--accent-2);
+    margin-top:-.4rem;
+  }
+  .print-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.6rem;
+    margin:1rem 0;
+    padding:1rem;
+    background:var(--paper-alt);
+    border-radius:var(--radius);
+  }
+  @media (min-width:600px){
+    .print-meta{grid-template-columns:1fr 1fr;}
+  }
+  .print-meta dt{font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
+  .print-meta dd{margin:0; font-family:var(--serif);}
+  .print-plan{padding-left:1.3rem;}
+  .print-plan li{margin-bottom:.35rem;}
+  .print-sub{margin-top:.3rem; padding-left:1.3rem; list-style:lower-alpha;}
+  .print-links{padding-left:1.3rem;}
+  .print-footer{margin-top:1.5rem; font-size:.78rem; color:var(--ink-soft);}
+
+  /* --- Analyse stats --- */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:.9rem;
+  }
+  @media (min-width:500px){
+    .stat-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  .stat{
+    background:var(--paper-alt);
+    border-radius:var(--radius);
+    padding:.8rem .9rem;
+  }
+  .stat .stat-label{
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:.15rem;
+  }
+  .stat .stat-value{
+    font-family:var(--serif);
+    font-size:1.25rem;
+    color:var(--accent);
+  }
+
+  .checklist{list-style:none; padding:0; margin:1rem 0 0;}
+  .check-row{
+    display:flex;
+    gap:.7rem;
+    align-items:flex-start;
+    padding:.6rem 0;
+    border-top:1px solid var(--line);
+  }
+  .check-row:first-child{border-top:none;}
+  .check-row .dot{
+    width:.7rem; height:.7rem;
+    border-radius:50%;
+    margin-top:.35rem;
+    flex-shrink:0;
+  }
+  .check-good .dot{background:var(--good);}
+  .check-warn .dot{background:var(--warn);}
+  .check-bad .dot{background:var(--bad);}
+  .check-na .dot{background:var(--na);}
+  .check-title{font-weight:600; font-size:.92rem;}
+  .check-status{
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-left:.4rem;
+    padding:.05rem .4rem;
+    border-radius:2px;
+    color:#fff;
+  }
+  .check-good .check-status{background:var(--good);}
+  .check-warn .check-status{background:var(--warn);}
+  .check-bad .check-status{background:var(--bad);}
+  .check-na .check-status{background:var(--na);}
+  .check-detail{display:block; font-size:.84rem; color:var(--ink-soft);}
+
+  /* --- Metadata bars --- */
+  .meta-counter{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin-top:.35rem;
+    font-family:var(--mono);
+  }
+  .bar-track{
+    width:100%;
+    height:.55rem;
+    background:var(--paper-alt);
+    border-radius:1rem;
+    overflow:hidden;
+    margin-top:.4rem;
+  }
+  .bar-fill{
+    height:100%;
+    width:0%;
+    border-radius:1rem;
+    background:var(--good);
+    transition:width .15s ease;
+  }
+  .bar-fill.bar-ok{background:var(--good);}
+  .bar-fill.bar-warn{background:var(--warn);}
+  .bar-fill.bar-over{background:var(--bad);}
+
+  .slug-row{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+  }
+  .slug-row input{flex:1 1 14rem;}
+  #meta-slug-status{
+    font-size:.8rem;
+    color:var(--good);
+    margin-top:.3rem;
+    display:inline-block;
+    min-height:1.2em;
+  }
+
+  footer.app-footer{
+    text-align:center;
+    padding:2rem 1.25rem 3rem;
+    font-size:.78rem;
+    color:var(--ink-soft);
+  }
+
+  @media print {
+    body{visibility:hidden;}
+    #brief-print, #brief-print *{visibility:visible;}
+    #brief-print{
+      position:absolute;
+      left:0; top:0; width:100%;
+      border:none;
+      padding:1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu</a>
+
+<header class="app-header">
+  <div class="header-inner">
+    <div>
+      <div class="brand">Studio SEO</div>
+      <div class="tagline">Outil de travail — Mots d'Orne</div>
+    </div>
+    <span class="privacy-flag">100&nbsp;% local — rien n'est envoyé sur internet</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections du Studio SEO">
+  <button type="button" role="tab" id="tab-brief" aria-selected="true" aria-controls="panel-brief" class="tab-btn" tabindex="0">Brief</button>
+  <button type="button" role="tab" id="tab-analyse" aria-selected="false" aria-controls="panel-analyse" class="tab-btn" tabindex="-1">Analyse</button>
+  <button type="button" role="tab" id="tab-meta" aria-selected="false" aria-controls="panel-meta" class="tab-btn" tabindex="-1">Métadonnées</button>
+</nav>
+
+<main id="main-content">
+
+  <!-- ================= BRIEF ================= -->
+  <section id="panel-brief" role="tabpanel" aria-labelledby="tab-brief" tabindex="0">
+    <p class="panel-intro">
+      Renseignez ce formulaire pour construire un brief de rédaction clair, à valider
+      avec le client avant d'écrire. Le formulaire est sauvegardé automatiquement dans
+      votre navigateur.
+    </p>
+    <div class="layout-brief">
+      <div class="card">
+        <h2>Formulaire de brief</h2>
+        <form id="brief-form" novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="brief-keyword">Mot-clé principal</label>
+              <input type="text" id="brief-keyword" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="brief-intent">Intention de recherche</label>
+              <select id="brief-intent">
+                <option value="informationnelle">Informationnelle</option>
+                <option value="transactionnelle">Transactionnelle</option>
+                <option value="locale">Locale</option>
+                <option value="navigationnelle">Navigationnelle</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="brief-secondary">Mots-clés secondaires</label>
+            <input type="text" id="brief-secondary" placeholder="séparés par des virgules" autocomplete="off">
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="brief-persona">Persona / cible</label>
+              <input type="text" id="brief-persona" placeholder="ex. artisan BTP en Normandie" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="brief-tone">Ton</label>
+              <input type="text" id="brief-tone" placeholder="ex. expert et accessible" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="brief-length">Longueur cible</label>
+            <input type="text" id="brief-length" placeholder="ex. 1 000 mots" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label id="plan-label">Plan (titres H2 / H3)</label>
+            <div id="plan-rows" role="group" aria-labelledby="plan-label"></div>
+            <button type="button" id="plan-add" class="btn btn-secondary btn-small">+ Ajouter une section</button>
+          </div>
+
+          <div class="field">
+            <label for="brief-links">Liens internes à placer</label>
+            <textarea id="brief-links" rows="3" placeholder="Un lien par ligne, ex.&nbsp;: Voir nos tarifs → /tarifs"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="brief-notes">Notes client</label>
+            <textarea id="brief-notes" rows="3" placeholder="Contraintes, expressions à éviter, éléments de contexte…"></textarea>
+          </div>
+
+          <button type="button" id="brief-generate" class="btn">Générer le brief</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Aperçu du brief</h2>
+        <p class="field-hint">Cliquez sur « Générer le brief » pour l'afficher ici, puis imprimez-le ou exportez-le en PDF.</p>
+        <div id="brief-print" class="brief-preview">
+          <p class="print-empty">Aucun brief généré pour le moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ANALYSE ================= -->
+  <section id="panel-analyse" role="tabpanel" aria-labelledby="tab-analyse" tabindex="0" hidden>
+    <p class="panel-intro">
+      Collez votre texte (brut ou en Markdown) pour obtenir une analyse de lisibilité et
+      de SEO en direct. Les indicateurs sont calculés localement, dans votre navigateur.
+    </p>
+    <div class="layout-analyse">
+      <div class="card">
+        <div class="field">
+          <label for="analyse-keyword">Mot-clé cible</label>
+          <input type="text" id="analyse-keyword" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="analyse-text">Texte à analyser</label>
+          <textarea id="analyse-text" rows="18" placeholder="Collez ici votre article (texte brut ou Markdown, avec ## pour les sous-titres)…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Analyse</h2>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-label">Mots</span>
+            <span class="stat-value" id="stat-words">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Caractères</span>
+            <span class="stat-value" id="stat-chars">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Lecture</span>
+            <span class="stat-value" id="stat-time">0 min</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Score Flesch (indicatif)</span>
+            <span class="stat-value" id="stat-flesch-score">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Lisibilité</span>
+            <span class="stat-value" id="stat-flesch-verdict">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Longueur moy. des phrases</span>
+            <span class="stat-value" id="stat-avg-sentence">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Phrases &gt; 25 mots</span>
+            <span class="stat-value" id="stat-long-sentences">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Densité mot-clé</span>
+            <span class="stat-value" id="stat-density">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Occurrences</span>
+            <span class="stat-value" id="stat-occurrences">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Mot-clé (100 premiers mots)</span>
+            <span class="stat-value" id="stat-first100">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Mot-clé en sous-titre</span>
+            <span class="stat-value" id="stat-subtitle">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Phrases avec transition</span>
+            <span class="stat-value" id="stat-transitions">—</span>
+          </div>
+        </div>
+
+        <h3>Points de vigilance</h3>
+        <ul class="checklist" id="analyse-checklist"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MÉTADONNÉES ================= -->
+  <section id="panel-meta" role="tabpanel" aria-labelledby="tab-meta" tabindex="0" hidden>
+    <p class="panel-intro">
+      Ajustez votre balise title et votre meta description en suivant leur largeur
+      d'affichage estimée en pixels (police Arial, approximation), puis générez un slug propre.
+    </p>
+    <div class="grid-2">
+      <div class="card">
+        <h2>Balise title</h2>
+        <div class="field">
+          <label for="meta-title">Title</label>
+          <input type="text" id="meta-title" autocomplete="off">
+        </div>
+        <div class="meta-counter" id="meta-title-count">0 caractère · 0px estimés / 580px</div>
+        <div class="bar-track" role="progressbar" aria-label="Largeur estimée du title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="bar-fill bar-ok" id="meta-title-bar"></div>
+        </div>
+
+        <h2 style="margin-top:2rem;">Meta description</h2>
+        <div class="field">
+          <label for="meta-desc">Meta description</label>
+          <textarea id="meta-desc" rows="3"></textarea>
+        </div>
+        <div class="meta-counter" id="meta-desc-count">0 caractère · 0px estimés / 990px</div>
+        <div class="bar-track" role="progressbar" aria-label="Largeur estimée de la meta description" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="bar-fill bar-ok" id="meta-desc-bar"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Slug d'URL</h2>
+        <p class="field-hint">Généré automatiquement à partir du title. Modifiable à la main si besoin.</p>
+        <div class="field">
+          <label for="meta-slug">Slug</label>
+          <div class="slug-row">
+            <input type="text" id="meta-slug" autocomplete="off">
+            <button type="button" id="meta-slug-copy" class="btn btn-secondary btn-small">Copier</button>
+            <button type="button" id="meta-slug-regen" class="btn btn-secondary btn-small">Régénérer depuis le title</button>
+          </div>
+        </div>
+        <span id="meta-slug-status" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  Studio SEO — outil interne Mots d'Orne. Aucune donnée saisie ici ne quitte votre
+  navigateur.
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     Helpers
+     ============================================================ */
+  function $(id){ return document.getElementById(id); }
+  function setText(id, val){ var el = $(id); if(el){ el.textContent = val; } }
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  /* ============================================================
+     State + persistence
+     ============================================================ */
+  var STORAGE_KEY = 'studio-seo-state-v1';
+
+  function defaultState(){
+    return {
+      brief: {
+        keyword: '', secondary: '', intent: 'informationnelle', persona: '',
+        tone: '', length: '', plan: [{level:'H2', text:''}], links: '', notes: ''
+      },
+      analyse: { text: '', keyword: '' },
+      meta: { title: '', description: '', slug: '' }
+    };
+  }
+
+  function loadState(){
+    var d = defaultState();
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return d;
+      var parsed = JSON.parse(raw);
+      var plan = (parsed.brief && Array.isArray(parsed.brief.plan) && parsed.brief.plan.length)
+        ? parsed.brief.plan : d.brief.plan;
+      return {
+        brief: Object.assign({}, d.brief, parsed.brief || {}, { plan: plan }),
+        analyse: Object.assign({}, d.analyse, parsed.analyse || {}),
+        meta: Object.assign({}, d.meta, parsed.meta || {})
+      };
+    }catch(e){
+      return d;
+    }
+  }
+
+  var state = loadState();
+
+  function saveState(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch(e){ /* localStorage indisponible (navigation privée, quota) : on ignore */ }
+  }
+
+  /* ============================================================
+     Tabs
+     ============================================================ */
+  var TAB_NAMES = ['brief', 'analyse', 'meta'];
+
+  function activateTab(name){
+    TAB_NAMES.forEach(function(n){
+      var selected = n === name;
+      var tabBtn = $('tab-' + n);
+      var panel = $('panel-' + n);
+      tabBtn.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tabBtn.tabIndex = selected ? 0 : -1;
+      panel.hidden = !selected;
+    });
+  }
+
+  function initTabs(){
+    TAB_NAMES.forEach(function(n, i){
+      var btn = $('tab-' + n);
+      btn.addEventListener('click', function(){ activateTab(n); });
+      btn.addEventListener('keydown', function(e){
+        var idx = TAB_NAMES.indexOf(n);
+        if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+          var next = e.key === 'ArrowRight' ? (idx + 1) % TAB_NAMES.length : (idx - 1 + TAB_NAMES.length) % TAB_NAMES.length;
+          var nextName = TAB_NAMES[next];
+          activateTab(nextName);
+          $('tab-' + nextName).focus();
+          e.preventDefault();
+        }
+      });
+    });
+  }
+
+  /* ============================================================
+     BRIEF
+     ============================================================ */
+  function renderPlan(){
+    var container = $('plan-rows');
+    container.innerHTML = '';
+    state.brief.plan.forEach(function(row, i){
+      var div = document.createElement('div');
+      div.className = 'plan-row';
+      div.innerHTML =
+        '<label class="visually-hidden" for="plan-level-' + i + '">Niveau du titre ' + (i + 1) + '</label>' +
+        '<select class="plan-level" id="plan-level-' + i + '" data-index="' + i + '">' +
+          '<option value="H2"' + (row.level === 'H2' ? ' selected' : '') + '>H2</option>' +
+          '<option value="H3"' + (row.level === 'H3' ? ' selected' : '') + '>H3</option>' +
+        '</select>' +
+        '<label class="visually-hidden" for="plan-text-' + i + '">Texte du titre ' + (i + 1) + '</label>' +
+        '<input type="text" class="plan-text" id="plan-text-' + i + '" data-index="' + i + '" value="' + escapeHtml(row.text) + '" placeholder="Titre de la section">' +
+        '<button type="button" class="plan-remove" data-index="' + i + '" aria-label="Supprimer la section ' + (i + 1) + '">&#10005;</button>';
+      container.appendChild(div);
+    });
+  }
+
+  function buildPlanHtml(plan){
+    if(!plan || !plan.length){
+      return '<p class="print-empty">Aucun plan renseigné.</p>';
+    }
+    var html = '';
+    var h2Open = false;
+    var subOpen = false;
+    plan.forEach(function(row){
+      var text = escapeHtml((row.text || '').trim() || '(titre à définir)');
+      if(row.level === 'H3'){
+        if(!h2Open){
+          html += '<li>' + text + '</li>';
+        } else {
+          if(!subOpen){ html += '<ol class="print-sub">'; subOpen = true; }
+          html += '<li>' + text + '</li>';
+        }
+      } else {
+        if(subOpen){ html += '</ol>'; subOpen = false; }
+        if(h2Open){ html += '</li>'; }
+        html += '<li>' + text;
+        h2Open = true;
+      }
+    });
+    if(subOpen){ html += '</ol>'; }
+    if(h2Open){ html += '</li>'; }
+    return '<ol class="print-plan">' + html + '</ol>';
+  }
+
+  function buildLinksHtml(text){
+    var lines = (text || '').split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
+    if(!lines.length){
+      return '<p class="print-empty">Aucun lien interne renseigné.</p>';
+    }
+    return '<ul class="print-links">' + lines.map(function(l){ return '<li>' + escapeHtml(l) + '</li>'; }).join('') + '</ul>';
+  }
+
+  var INTENT_LABELS = {
+    informationnelle: 'Informationnelle',
+    transactionnelle: 'Transactionnelle',
+    locale: 'Locale',
+    navigationnelle: 'Navigationnelle'
+  };
+
+  function generateBrief(){
+    var b = state.brief;
+    var keyword = (b.keyword || '').trim() || '(non renseigné)';
+    var dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    var html =
+      '<h2>Brief rédactionnel</h2>' +
+      '<p class="print-subtitle">' + escapeHtml(keyword) + '</p>' +
+      '<dl class="print-meta">' +
+        '<div><dt>Mot-clé principal</dt><dd>' + escapeHtml(keyword) + '</dd></div>' +
+        '<div><dt>Mots-clés secondaires</dt><dd>' + escapeHtml((b.secondary || '').trim() || '(aucun)') + '</dd></div>' +
+        '<div><dt>Intention de recherche</dt><dd>' + (INTENT_LABELS[b.intent] || escapeHtml(b.intent)) + '</dd></div>' +
+        '<div><dt>Persona / cible</dt><dd>' + escapeHtml((b.persona || '').trim() || '(non renseigné)') + '</dd></div>' +
+        '<div><dt>Ton</dt><dd>' + escapeHtml((b.tone || '').trim() || '(non renseigné)') + '</dd></div>' +
+        '<div><dt>Longueur cible</dt><dd>' + escapeHtml((b.length || '').trim() || '(non renseignée)') + '</dd></div>' +
+      '</dl>' +
+      '<h3>Plan</h3>' + buildPlanHtml(b.plan) +
+      '<h3>Liens internes à placer</h3>' + buildLinksHtml(b.links) +
+      '<h3>Notes client</h3>' +
+      '<p class="print-notes">' + escapeHtml((b.notes || '').trim() || '(aucune note)').replace(/\n/g, '<br>') + '</p>' +
+      '<p class="print-footer">Brief généré le ' + dateStr + ' avec le Studio SEO — Mots d\'Orne.</p>';
+    $('brief-print').innerHTML = html;
+    window.print();
+  }
+
+  function initBrief(){
+    var b = state.brief;
+    $('brief-keyword').value = b.keyword;
+    $('brief-secondary').value = b.secondary;
+    $('brief-intent').value = b.intent;
+    $('brief-persona').value = b.persona;
+    $('brief-tone').value = b.tone;
+    $('brief-length').value = b.length;
+    $('brief-links').value = b.links;
+    $('brief-notes').value = b.notes;
+    renderPlan();
+
+    $('brief-keyword').addEventListener('input', function(){ state.brief.keyword = this.value; saveState(); });
+    $('brief-secondary').addEventListener('input', function(){ state.brief.secondary = this.value; saveState(); });
+    $('brief-intent').addEventListener('change', function(){ state.brief.intent = this.value; saveState(); });
+    $('brief-persona').addEventListener('input', function(){ state.brief.persona = this.value; saveState(); });
+    $('brief-tone').addEventListener('input', function(){ state.brief.tone = this.value; saveState(); });
+    $('brief-length').addEventListener('input', function(){ state.brief.length = this.value; saveState(); });
+    $('brief-links').addEventListener('input', function(){ state.brief.links = this.value; saveState(); });
+    $('brief-notes').addEventListener('input', function(){ state.brief.notes = this.value; saveState(); });
+
+    $('plan-rows').addEventListener('input', function(e){
+      var idx = e.target.getAttribute('data-index');
+      if(idx === null) return;
+      idx = Number(idx);
+      if(e.target.classList.contains('plan-text')){ state.brief.plan[idx].text = e.target.value; saveState(); }
+      if(e.target.classList.contains('plan-level')){ state.brief.plan[idx].level = e.target.value; saveState(); }
+    });
+    $('plan-rows').addEventListener('click', function(e){
+      var btn = e.target.closest ? e.target.closest('.plan-remove') : null;
+      if(!btn) return;
+      var idx = Number(btn.getAttribute('data-index'));
+      state.brief.plan.splice(idx, 1);
+      if(!state.brief.plan.length){ state.brief.plan.push({level:'H2', text:''}); }
+      renderPlan();
+      saveState();
+    });
+    $('plan-add').addEventListener('click', function(){
+      state.brief.plan.push({level:'H2', text:''});
+      renderPlan();
+      saveState();
+      var last = $('plan-text-' + (state.brief.plan.length - 1));
+      if(last){ last.focus(); }
+    });
+
+    $('brief-generate').addEventListener('click', generateBrief);
+  }
+
+  /* ============================================================
+     ANALYSE — pure functions
+     ============================================================ */
+  function stripMarkdown(raw){
+    var text = String(raw || '');
+    var lines = text.split('\n').map(function(line){
+      var l = line;
+      l = l.replace(/^\s{0,3}#{1,6}\s+/, '');
+      l = l.replace(/^\s*[-*+]\s+/, '');
+      l = l.replace(/^\s*\d+[.)]\s+/, '');
+      l = l.replace(/^\s*>\s?/, '');
+      return l;
+    });
+    var joined = lines.join('\n');
+    joined = joined.replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1');
+    joined = joined.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
+    joined = joined.replace(/(\*\*\*|\*\*|\*|___|__|_|`)/g, '');
+    return joined;
+  }
+
+  function getWords(text){
+    var t = String(text || '').trim();
+    if(!t) return [];
+    return t.split(/\s+/).filter(Boolean);
+  }
+
+  function getSentences(text){
+    var t = String(text || '').trim();
+    if(!t) return [];
+    var raw = t.split(/[.!?…]+(?:\s+|$)/).map(function(s){ return s.trim(); }).filter(Boolean);
+    if(raw.length === 0){ return [t]; }
+    return raw;
+  }
+
+  function countSyllables(word){
+    var clean = String(word || '').toLowerCase().replace(/[^a-zàâäéèêëîïôöùûüœç]/g, '');
+    if(!clean) return 0;
+    var groups = clean.match(/[aeiouyàâäéèêëîïôöùûüœ]+/g) || [];
+    var syllables = groups.length;
+    if(clean.length >= 3 && clean.charAt(clean.length - 1) === 'e'){
+      syllables -= 1;
+    }
+    return Math.max(1, syllables);
+  }
+
+  function fleschScore(wordCount, sentenceCount, syllableCount){
+    if(!wordCount || !sentenceCount) return null;
+    return 207 - 1.015 * (wordCount / sentenceCount) - 73.6 * (syllableCount / wordCount);
+  }
+
+  function fleschVerdict(score){
+    if(score === null || score === undefined || isNaN(score)) return 'Indisponible';
+    if(score >= 90) return 'Très facile';
+    if(score >= 70) return 'Facile';
+    if(score >= 60) return 'Assez facile';
+    if(score >= 50) return 'Moyen';
+    if(score >= 30) return 'Difficile';
+    return 'Très difficile';
+  }
+
+  var TRANSITIONS = [
+    "tout d'abord", "d'abord", "ensuite", "enfin", "de plus", "en outre", "par ailleurs",
+    "cependant", "en revanche", "à l'inverse", "au contraire", "pourtant",
+    "néanmoins", "toutefois", "or", "donc", "ainsi", "par conséquent", "c'est pourquoi",
+    "dès lors", "de ce fait", "en conséquence", "en effet", "effectivement", "certes",
+    "autrement dit", "c'est-à-dire", "en d'autres termes", "notamment", "par exemple",
+    "en particulier", "en résumé", "en somme", "bref", "pour conclure", "en conclusion",
+    "en définitive", "finalement", "en premier lieu", "en second lieu", "en dernier lieu",
+    "premièrement", "deuxièmement", "troisièmement", "d'une part", "d'autre part",
+    "de même", "de surcroît", "qui plus est", "du reste", "en fin de compte",
+    "malgré tout", "quoi qu'il en soit", "en parallèle", "parallèlement", "désormais",
+    "par la suite", "plus tard", "aussitôt", "entre-temps", "puis"
+  ];
+  var TRANSITIONS_SORTED = TRANSITIONS.slice().sort(function(a, b){ return b.length - a.length; });
+
+  function startsWithTransition(sentence){
+    var s = String(sentence || '').trim().toLowerCase().replace(/^[«"'(\s]+/, '');
+    if(!s) return false;
+    for(var i = 0; i < TRANSITIONS_SORTED.length; i++){
+      var phrase = TRANSITIONS_SORTED[i];
+      if(s.indexOf(phrase) === 0){
+        var next = s.charAt(phrase.length);
+        if(next === '' || /[\s,;:.!?]/.test(next)) return true;
+      }
+    }
+    return false;
+  }
+
+  function escapeRegExp(str){
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function analyzeKeyword(plainWords, plainTextLower, rawText, keyword){
+    var kw = String(keyword || '').trim();
+    if(!kw) return null;
+    var kwLower = kw.toLowerCase();
+    var kwWordCount = getWords(kw).length || 1;
+    var re = new RegExp(escapeRegExp(kwLower), 'gi');
+    var occurrences = (plainTextLower.match(re) || []).length;
+    var totalWords = plainWords.length;
+    var density = totalWords ? (occurrences * kwWordCount / totalWords) * 100 : 0;
+    var first100 = plainWords.slice(0, 100).join(' ').toLowerCase();
+    var inFirst100 = first100.indexOf(kwLower) !== -1;
+    var subtitleLines = String(rawText || '').split('\n').filter(function(l){ return /^\s{0,3}#{2,3}\s+/.test(l); });
+    var inSubtitle = subtitleLines.some(function(l){ return l.toLowerCase().indexOf(kwLower) !== -1; });
+    return { occurrences: occurrences, density: density, inFirst100: inFirst100, inSubtitle: inSubtitle };
+  }
+
+  /* ============================================================
+     ANALYSE — checklist rendering
+     ============================================================ */
+  function checkRow(status, title, detail){
+    var statusLabel = { good: 'Bon', warn: 'À surveiller', bad: 'À corriger', na: 'Non applicable' }[status];
+    return '<li class="check-row check-' + status + '">' +
+      '<span class="dot" aria-hidden="true"></span>' +
+      '<span class="check-body">' +
+        '<span class="check-title">' + escapeHtml(title) + '<span class="check-status">' + statusLabel + '</span></span>' +
+        '<span class="check-detail">' + escapeHtml(detail) + '</span>' +
+      '</span>' +
+    '</li>';
+  }
+
+  function renderChecklist(d){
+    var rows = [];
+
+    if(d.wordCount === 0){
+      rows.push(checkRow('na', 'Longueur du texte', 'Collez un texte pour lancer l\'analyse.'));
+    } else if(d.wordCount >= 300){
+      rows.push(checkRow('good', 'Longueur du texte', d.wordCount + ' mots.'));
+    } else if(d.wordCount >= 150){
+      rows.push(checkRow('warn', 'Longueur du texte', d.wordCount + ' mots — un peu court pour la plupart des sujets SEO.'));
+    } else {
+      rows.push(checkRow('bad', 'Longueur du texte', d.wordCount + ' mots — probablement trop court.'));
+    }
+
+    if(d.flesch === null){
+      rows.push(checkRow('na', 'Lisibilité (Flesch, indicatif)', 'Pas assez de texte pour calculer un score.'));
+    } else if(d.flesch >= 60){
+      rows.push(checkRow('good', 'Lisibilité (Flesch, indicatif)', d.flesch.toFixed(1) + ' — ' + fleschVerdict(d.flesch) + '.'));
+    } else if(d.flesch >= 40){
+      rows.push(checkRow('warn', 'Lisibilité (Flesch, indicatif)', d.flesch.toFixed(1) + ' — ' + fleschVerdict(d.flesch) + ', à simplifier si possible.'));
+    } else {
+      rows.push(checkRow('bad', 'Lisibilité (Flesch, indicatif)', d.flesch.toFixed(1) + ' — ' + fleschVerdict(d.flesch) + ', texte probablement trop complexe.'));
+    }
+
+    if(d.sentenceCount === 0){
+      rows.push(checkRow('na', 'Phrases longues', 'Aucune phrase détectée.'));
+    } else if(d.longSentencePct < 10){
+      rows.push(checkRow('good', 'Phrases longues', d.longSentencePct.toFixed(0) + ' % de phrases de plus de 25 mots.'));
+    } else if(d.longSentencePct <= 25){
+      rows.push(checkRow('warn', 'Phrases longues', d.longSentencePct.toFixed(0) + ' % de phrases de plus de 25 mots — surveillez la longueur.'));
+    } else {
+      rows.push(checkRow('bad', 'Phrases longues', d.longSentencePct.toFixed(0) + ' % de phrases de plus de 25 mots — trop de phrases longues.'));
+    }
+
+    if(!d.kwData){
+      rows.push(checkRow('na', 'Densité du mot-clé', 'Renseignez un mot-clé cible pour activer cette analyse.'));
+      rows.push(checkRow('na', 'Mot-clé dans les 100 premiers mots', 'Renseignez un mot-clé cible.'));
+      rows.push(checkRow('na', 'Mot-clé dans un sous-titre', 'Renseignez un mot-clé cible.'));
+    } else {
+      var dens = d.kwData.density;
+      if(dens === 0){
+        rows.push(checkRow('bad', 'Densité du mot-clé', 'Le mot-clé n\'apparaît pas dans le texte.'));
+      } else if(dens > 5){
+        rows.push(checkRow('bad', 'Densité du mot-clé', dens.toFixed(2) + ' % — sur-optimisation probable.'));
+      } else if(dens < 0.3 || dens > 2.5){
+        rows.push(checkRow('warn', 'Densité du mot-clé', dens.toFixed(2) + ' % — hors de la fourchette recommandée (0,3 à 2,5 %).'));
+      } else {
+        rows.push(checkRow('good', 'Densité du mot-clé', dens.toFixed(2) + ' % — dans la fourchette recommandée.'));
+      }
+
+      rows.push(d.kwData.inFirst100
+        ? checkRow('good', 'Mot-clé dans les 100 premiers mots', 'Présent.')
+        : checkRow('bad', 'Mot-clé dans les 100 premiers mots', 'Absent — rapprochez-le de l\'introduction.'));
+
+      rows.push(d.kwData.inSubtitle
+        ? checkRow('good', 'Mot-clé dans un sous-titre', 'Présent dans au moins un sous-titre (## ou ###).')
+        : checkRow('warn', 'Mot-clé dans un sous-titre', 'Absent des sous-titres — pas obligatoire, mais recommandé.'));
+    }
+
+    if(d.sentenceCount === 0){
+      rows.push(checkRow('na', 'Mots de transition', 'Aucune phrase détectée.'));
+    } else if(d.transitionPct >= 30){
+      rows.push(checkRow('good', 'Mots de transition', d.transitionPct.toFixed(0) + ' % des phrases commencent par un connecteur logique.'));
+    } else if(d.transitionPct >= 15){
+      rows.push(checkRow('warn', 'Mots de transition', d.transitionPct.toFixed(0) + ' % — la fluidité pourrait être améliorée.'));
+    } else {
+      rows.push(checkRow('bad', 'Mots de transition', d.transitionPct.toFixed(0) + ' % — texte probablement haché, peu de connecteurs.'));
+    }
+
+    $('analyse-checklist').innerHTML = rows.join('');
+  }
+
+  var analyseTimer = null;
+  function scheduleAnalysis(){
+    if(analyseTimer) clearTimeout(analyseTimer);
+    analyseTimer = setTimeout(runAnalysis, 120);
+  }
+
+  function runAnalysis(){
+    var rawText = $('analyse-text').value;
+    var keyword = $('analyse-keyword').value;
+
+    var plain = stripMarkdown(rawText);
+    var words = getWords(plain);
+    var wordCount = words.length;
+    var charCount = plain.trim().length;
+    var sentences = wordCount ? getSentences(plain) : [];
+    var sentenceCount = sentences.length;
+    var readingMinutes = wordCount ? Math.max(1, Math.round(wordCount / 200)) : 0;
+
+    var syllableTotal = 0;
+    for(var i = 0; i < words.length; i++){ syllableTotal += countSyllables(words[i]); }
+    var flesch = fleschScore(wordCount, sentenceCount, syllableTotal);
+
+    var avgSentenceLen = sentenceCount ? wordCount / sentenceCount : 0;
+    var longSentences = sentences.filter(function(s){ return getWords(s).length > 25; }).length;
+    var longSentencePct = sentenceCount ? (longSentences / sentenceCount) * 100 : 0;
+
+    var transitionCount = sentences.filter(startsWithTransition).length;
+    var transitionPct = sentenceCount ? (transitionCount / sentenceCount) * 100 : 0;
+
+    var kwData = analyzeKeyword(words, plain.toLowerCase(), rawText, keyword);
+
+    setText('stat-words', String(wordCount));
+    setText('stat-chars', String(charCount));
+    setText('stat-time', readingMinutes + ' min');
+    setText('stat-flesch-score', flesch === null ? '—' : flesch.toFixed(1));
+    setText('stat-flesch-verdict', fleschVerdict(flesch));
+    setText('stat-avg-sentence', sentenceCount ? avgSentenceLen.toFixed(1) : '—');
+    setText('stat-long-sentences', sentenceCount ? longSentencePct.toFixed(0) + ' %' : '—');
+    setText('stat-transitions', sentenceCount ? transitionPct.toFixed(0) + ' %' : '—');
+
+    if(kwData){
+      setText('stat-density', kwData.density.toFixed(2) + ' %');
+      setText('stat-occurrences', String(kwData.occurrences));
+      setText('stat-first100', kwData.inFirst100 ? 'Oui' : 'Non');
+      setText('stat-subtitle', kwData.inSubtitle ? 'Oui' : 'Non');
+    } else {
+      setText('stat-density', '—');
+      setText('stat-occurrences', '—');
+      setText('stat-first100', '—');
+      setText('stat-subtitle', '—');
+    }
+
+    renderChecklist({
+      wordCount: wordCount, flesch: flesch, sentenceCount: sentenceCount,
+      longSentencePct: longSentencePct, transitionPct: transitionPct, kwData: kwData
+    });
+  }
+
+  function initAnalyse(){
+    $('analyse-text').value = state.analyse.text;
+    $('analyse-keyword').value = state.analyse.keyword;
+    $('analyse-text').addEventListener('input', function(){
+      state.analyse.text = this.value;
+      saveState();
+      scheduleAnalysis();
+    });
+    $('analyse-keyword').addEventListener('input', function(){
+      state.analyse.keyword = this.value;
+      saveState();
+      scheduleAnalysis();
+    });
+    runAnalysis();
+  }
+
+  /* ============================================================
+     MÉTADONNÉES
+     ============================================================ */
+  var TITLE_LIMIT = 580;
+  var DESC_LIMIT = 990;
+  var NARROW_CHARS = 'iljt';
+
+  function charWidth(ch){
+    if(ch === ' ') return 4;
+    if(NARROW_CHARS.indexOf(ch) !== -1) return 4;
+    if(/[A-Z0-9]/.test(ch)) return 9;
+    if(/[a-z]/.test(ch)) return 7;
+    if(/[à-öø-ÿ]/.test(ch)) return 7;
+    if(/[À-ÖØ-Þ]/.test(ch)) return 9;
+    return 7;
+  }
+
+  function pixelWidth(text){
+    var total = 0;
+    var str = String(text || '');
+    for(var i = 0; i < str.length; i++){ total += charWidth(str.charAt(i)); }
+    return total;
+  }
+
+  function slugify(text){
+    return String(text || '')
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .replace(/-{2,}/g, '-');
+  }
+
+  function updateMetaField(inputId, countId, barId, limit){
+    var val = $(inputId).value;
+    var chars = val.length;
+    var px = pixelWidth(val);
+    setText(countId, chars + ' caractère' + (chars > 1 ? 's' : '') + ' · ' + px + 'px estimés / ' + limit + 'px');
+    var pct = Math.min(100, (px / limit) * 100);
+    var bar = $(barId);
+    bar.style.width = pct + '%';
+    var track = bar.parentElement;
+    if(track){ track.setAttribute('aria-valuenow', String(Math.round(pct))); }
+    var cls = 'bar-ok';
+    if(px > limit){ cls = 'bar-over'; }
+    else if(px > limit * 0.92){ cls = 'bar-warn'; }
+    bar.className = 'bar-fill ' + cls;
+  }
+
+  var slugManuallyEdited = false;
+
+  function initMeta(){
+    $('meta-title').value = state.meta.title;
+    $('meta-desc').value = state.meta.description;
+    $('meta-slug').value = state.meta.slug || slugify(state.meta.title);
+    slugManuallyEdited = !!(state.meta.slug && state.meta.slug !== slugify(state.meta.title));
+
+    updateMetaField('meta-title', 'meta-title-count', 'meta-title-bar', TITLE_LIMIT);
+    updateMetaField('meta-desc', 'meta-desc-count', 'meta-desc-bar', DESC_LIMIT);
+
+    $('meta-title').addEventListener('input', function(){
+      state.meta.title = this.value;
+      updateMetaField('meta-title', 'meta-title-count', 'meta-title-bar', TITLE_LIMIT);
+      if(!slugManuallyEdited){
+        var slug = slugify(this.value);
+        $('meta-slug').value = slug;
+        state.meta.slug = slug;
+      }
+      saveState();
+    });
+
+    $('meta-desc').addEventListener('input', function(){
+      state.meta.description = this.value;
+      updateMetaField('meta-desc', 'meta-desc-count', 'meta-desc-bar', DESC_LIMIT);
+      saveState();
+    });
+
+    $('meta-slug').addEventListener('input', function(){
+      slugManuallyEdited = true;
+      state.meta.slug = this.value;
+      saveState();
+    });
+
+    $('meta-slug-regen').addEventListener('click', function(){
+      slugManuallyEdited = false;
+      var slug = slugify($('meta-title').value);
+      $('meta-slug').value = slug;
+      state.meta.slug = slug;
+      saveState();
+    });
+
+    $('meta-slug-copy').addEventListener('click', function(){
+      var val = $('meta-slug').value;
+      if(!val) return;
+      function done(ok){
+        setText('meta-slug-status', ok ? 'Copié !' : 'Copie impossible — sélectionnez et copiez manuellement.');
+        setTimeout(function(){ setText('meta-slug-status', ''); }, 2500);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(val).then(function(){ done(true); }, function(){ fallbackCopy(); });
+      } else {
+        fallbackCopy();
+      }
+      function fallbackCopy(){
+        try{
+          var tmp = document.createElement('textarea');
+          tmp.value = val;
+          tmp.style.position = 'fixed';
+          tmp.style.opacity = '0';
+          document.body.appendChild(tmp);
+          tmp.select();
+          var ok = document.execCommand('copy');
+          document.body.removeChild(tmp);
+          done(ok);
+        }catch(e){
+          done(false);
+        }
+      }
+    });
+  }
+
+  /* ============================================================
+     Init
+     ============================================================ */
+  document.addEventListener('DOMContentLoaded', function(){
+    initTabs();
+    initBrief();
+    initAnalyse();
+    initMeta();
+  });
+
+  /* Expose pure functions for headless testing (no effect on app behaviour). */
+  window.__studioSeoTest = {
+    stripMarkdown: stripMarkdown, getWords: getWords, getSentences: getSentences,
+    countSyllables: countSyllables, fleschScore: fleschScore, fleschVerdict: fleschVerdict,
+    startsWithTransition: startsWithTransition, analyzeKeyword: analyzeKeyword,
+    charWidth: charWidth, pixelWidth: pixelWidth, slugify: slugify, buildPlanHtml: buildPlanHtml
+  };
+})();
+</script>
+
+</body>
+</html>

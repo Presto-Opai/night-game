@@ -1,0 +1,59 @@
+{
+  "businessName": "Le Gîte de la Rouvre",
+  "slug": "gite-de-la-rouvre",
+  "metier": "Gîte et chambres d'hôtes",
+  "theme": "sejour",
+  "tagline": "Une pause nature au cœur de la Suisse normande",
+  "town": "Athis-Val-de-Rouvre",
+  "phone": "02 33 96 41 08",
+  "email": "contact@gite-rouvre.fr",
+  "address": "Le Moulin, 61430 Athis-Val-de-Rouvre",
+  "siret": "000 000 000 00000",
+  "description": [
+    "Au bord de la rivière Rouvre, à deux pas de la Roche d'Oëtre, le Gîte de la Rouvre accueille depuis 2012 les amoureux de nature dans une ancienne dépendance de moulin restaurée avec soin par Nathalie et Éric Fontaine.",
+    "Un gîte de 6 personnes et deux chambres d'hôtes, chacune avec vue sur les collines du bocage, pour un séjour au calme, entre randonnées, canoë sur la Rouvre et visites des marchés de producteurs locaux.",
+    "Nathalie et Éric connaissent chaque sentier du coin et se font un plaisir de préparer un itinéraire sur mesure, avec toujours un panier de produits normands qui vous attend à l'arrivée."
+  ],
+  "services": [
+    {
+      "name": "Gîte « Le Moulin » (6 personnes)",
+      "description": "Maison indépendante avec jardin clos, cheminée et vue sur la rivière : idéale pour un séjour en famille ou entre amis."
+    },
+    {
+      "name": "Chambre d'hôtes « Le Bocage »",
+      "description": "Chambre double avec salle d'eau privative, décoration en bois brut et lin naturel, petit-déjeuner compris."
+    },
+    {
+      "name": "Chambre d'hôtes « La Rivière »",
+      "description": "Chambre familiale pouvant accueillir jusqu'à 4 personnes, avec vue directe sur la Rouvre."
+    },
+    {
+      "name": "Location de vélos et de canoës",
+      "description": "Pour explorer les gorges de la Rouvre et les chemins de randonnée du Val de Rouvre à votre rythme."
+    },
+    {
+      "name": "Panier petit-déjeuner et produits locaux",
+      "description": "Confitures maison, cidre et fromages de producteurs voisins, disponibles sur simple demande à votre arrivée."
+    }
+  ],
+  "openingHours": [
+    "Ouvert toute l'année, sur réservation",
+    "Réception : 8h00 – 20h00",
+    "Arrivée (check-in) : à partir de 16h00",
+    "Départ (check-out) : avant 11h00"
+  ],
+  "testimonials": [
+    {
+      "author": "Élodie et Thomas, Rennes",
+      "text": "Un accueil formidable et un cadre à couper le souffle. Nous sommes repartis avec plein d'adresses de balades, on reviendra c'est certain."
+    },
+    {
+      "author": "Famille Petit, Caen",
+      "text": "Le gîte est encore plus beau qu'en photo, tout le confort et une vue magnifique sur la vallée. Les enfants ont adoré le canoë."
+    },
+    {
+      "author": "Bernard M., Paris",
+      "text": "Nathalie nous a concocté un itinéraire de randonnée sur mesure. Un vrai moment de calme, loin de tout, avec un accueil très humain."
+    }
+  ]
+}

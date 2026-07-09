@@ -1,0 +1,59 @@
+{
+  "businessName": "Aux Délices du Bocage",
+  "slug": "aux-delices-du-bocage",
+  "metier": "Boulangerie-pâtisserie artisanale",
+  "theme": "gourmand",
+  "tagline": "Le pain et les gourmandises comme au temps de nos grands-mères",
+  "town": "Condé-en-Normandie",
+  "phone": "02 31 69 24 18",
+  "email": "bonjour@delices-du-bocage.fr",
+  "address": "4 place du Champ de Foire, 14110 Condé-en-Normandie",
+  "siret": "000 000 000 00000",
+  "description": [
+    "Depuis 2015, la famille Duval pétrit chaque nuit le pain de la boulangerie « Aux Délices du Bocage », sur la place du Champ de Foire à Condé-en-Normandie. Farines de meuniers locaux, levain naturel, cuisson au four à sole : rien n'a changé depuis l'ouverture.",
+    "En vitrine, viennoiseries pur beurre, pâtisseries de saison et gâteaux sur commande pour les anniversaires, mariages et fêtes de famille. Une équipe de quatre personnes, dont deux apprentis formés sur place, accueille les clients du mardi au dimanche matin.",
+    "« On ne fait pas dans la quantité, on fait dans le soin » : c'est la devise affichée derrière le comptoir, et elle se sent dès la première bouchée."
+  ],
+  "services": [
+    {
+      "name": "Pains traditionnels",
+      "description": "Baguette « Tradition », pain de campagne au levain, pain aux céréales et pain de seigle, pétris et cuits sur place chaque jour."
+    },
+    {
+      "name": "Viennoiseries maison",
+      "description": "Croissants, pains au chocolat et chaussons aux pommes pur beurre, façonnés à la main dès l'aube."
+    },
+    {
+      "name": "Pâtisseries de saison",
+      "description": "Tartes aux fruits du verger, entremets et éclairs revisités au fil des saisons, à l'unité ou pour vos réceptions."
+    },
+    {
+      "name": "Gâteaux sur commande",
+      "description": "Gâteaux d'anniversaire, pièces montées et wedding cakes réalisés sur mesure, à commander une semaine à l'avance."
+    },
+    {
+      "name": "Formule snacking du midi",
+      "description": "Sandwichs sur pain maison, quiches et parts de pizza préparés chaque matin pour la pause déjeuner."
+    }
+  ],
+  "openingHours": [
+    "Mardi – Vendredi : 6h30 – 19h30",
+    "Samedi : 6h30 – 19h30",
+    "Dimanche : 6h30 – 13h00",
+    "Lundi : fermé"
+  ],
+  "testimonials": [
+    {
+      "author": "Isabelle F., Condé-en-Normandie",
+      "text": "Le meilleur pain au levain du secteur, et les croissants n'ont rien à envier à ceux d'une grande ville. Un vrai bonheur chaque matin."
+    },
+    {
+      "author": "Marc T., Saint-Pierre-Tarentaine",
+      "text": "Nous avons commandé notre gâteau de mariage ici : magnifique et délicieux, toute la famille en parle encore."
+    },
+    {
+      "author": "Chantal B., Condé-en-Normandie",
+      "text": "Accueil chaleureux, produits impeccables, et toujours un petit conseil gourmand pour accompagner nos achats du dimanche."
+    }
+  ]
+}

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aux Délices du Bocage — Boulangerie-pâtisserie artisanale à Condé-en-Normandie</title>
+<meta name="description" content="Depuis 2015, la famille Duval pétrit chaque nuit le pain de la boulangerie « Aux Délices du Bocage », sur la place du Champ de Foire à Condé-en-Normandie…">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%236b1f2a%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2242%22%20font-size%3D%2232%22%20text-anchor%3D%22middle%22%3E%F0%9F%A5%96%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Aux Délices du Bocage — Boulangerie-pâtisserie artisanale à Condé-en-Normandie">
+<meta property="og:description" content="Depuis 2015, la famille Duval pétrit chaque nuit le pain de la boulangerie « Aux Délices du Bocage », sur la place du Champ de Foire à Condé-en-Normandie…">
+<meta property="og:site_name" content="Aux Délices du Bocage">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "Aux Délices du Bocage",
+  "description": "Depuis 2015, la famille Duval pétrit chaque nuit le pain de la boulangerie « Aux Délices du Bocage », sur la place du Champ de Foire à Condé-en-Normandie. Farines de meuniers locaux, levain naturel, cuisson au four à sole : rien n'a changé depuis l'ouverture. En vitrine, viennoiseries pur beurre, pâtisseries de saison et gâteaux sur commande pour les anniversaires, mariages et fêtes de famille. Une équipe de quatre personnes, dont deux apprentis formés sur place, accueille les clients du mardi au dimanche matin. « On ne fait pas dans la quantité, on fait dans le soin » : c'est la devise affichée derrière le comptoir, et elle se sent dès la première bouchée.",
+  "telephone": "+33231692418",
+  "email": "bonjour@delices-du-bocage.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4 place du Champ de Foire, 14110 Condé-en-Normandie",
+    "addressLocality": "Condé-en-Normandie",
+    "addressCountry": "FR"
+  },
+  "areaServed": "Condé-en-Normandie"
+}
+</script>
+<style>
+:root {
+      --primary: #6b1f2a;
+      --primary-dark: #4b141c;
+      --accent: #c8952a;
+      --background: #fbf3e7;
+      --surface: #fffaf1;
+      --text: #3a2418;
+      --text-muted: #6b5544;
+      --hero-text: #fff8ec;
+      --radius: 18px;
+      --radius-lg: 28px;
+      --font-heading: Georgia, 'Times New Roman', serif;
+      --font-body: Georgia, 'Times New Roman', serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--primary); }
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      margin: 0 0 0.6em;
+      line-height: 1.2;
+    }
+    h2 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem); margin-bottom: 1em; }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 1em; }
+    .section { padding: 3.5rem 1.25rem; max-width: 1080px; margin: 0 auto; }
+    .section > h2 { text-align: center; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ---- En-tête / hero ---- */
+    .hero {
+      background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 2px, transparent 3px), radial-gradient(circle at 85% 70%, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 2px, transparent 3px), linear-gradient(150deg, var(--primary-dark), var(--primary));
+      color: var(--hero-text);
+      text-align: center;
+    }
+    .hero-inner { padding: 4.5rem 1.25rem 3rem; max-width: 780px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.14);
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      margin-bottom: 1.4em;
+    }
+    .hero h1 {
+      color: var(--hero-text);
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.1rem);
+      margin-bottom: 0.35em;
+    }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 1rem + 0.5vw, 1.35rem);
+      opacity: 0.92;
+      max-width: 46ch;
+      margin: 0 auto 2em;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.85em 1.6em;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      border: 2px solid transparent;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #1a1108; }
+    .btn-primary:hover { box-shadow: 0 10px 24px -8px rgba(0,0,0,0.45); }
+    .btn-ghost { background: transparent; color: var(--hero-text); border-color: rgba(255,255,255,0.55); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1.4rem;
+      background: rgba(0,0,0,0.16);
+      padding: 0.9rem 1rem;
+    }
+    .hero-nav a {
+      color: var(--hero-text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      opacity: 0.9;
+      padding: 0.2em 0.1em;
+      border-bottom: 2px solid transparent;
+    }
+    .hero-nav a:hover { opacity: 1; border-bottom-color: var(--accent); }
+
+    /* ---- Grilles génériques ---- */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .grid-services { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---- Services ---- */
+    .services { background: var(--surface); border-radius: var(--radius-lg); }
+    .card {
+      background: var(--background);
+      border: 1px solid rgba(107,31,42,0.15);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .card h3 { margin-bottom: 0.4em; }
+    .card p { color: var(--text-muted); margin-bottom: 0; }
+
+    /* ---- À propos ---- */
+    .about { text-align: center; }
+    .about-copy { max-width: 68ch; margin: 0 auto; text-align: left; }
+    .about-copy p { color: var(--text-muted); }
+
+    /* ---- Avis clients ---- */
+    .testimonials { background: var(--surface); border-radius: var(--radius-lg); }
+    .testimonial {
+      margin: 0;
+      background: var(--background);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border: 1px solid rgba(107,31,42,0.15);
+    }
+    .testimonial p { font-style: italic; color: var(--text); margin-bottom: 0.75em; }
+    .testimonial p::before { content: '\201C'; }
+    .testimonial p::after { content: '\201D'; }
+    .testimonial cite { font-style: normal; font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+
+    /* ---- Horaires ---- */
+    .hours-list {
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      max-width: 560px;
+      display: grid;
+      gap: 0.6rem;
+    }
+    .hours-list li {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(107,31,42,0.15);
+      padding: 0.85em 1.2em;
+      font-weight: 600;
+    }
+
+    /* ---- Contact ---- */
+    .contact-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      .contact-grid { grid-template-columns: 1.2fr 1fr; }
+    }
+    .contact-grid a { color: var(--primary); text-decoration: none; font-weight: 700; }
+    .contact-grid a:hover { text-decoration: underline; }
+    .contact-grid strong { display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.2em; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid rgba(107,31,42,0.15);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+    .contact-visual {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 2px, transparent 3px), radial-gradient(circle at 85% 70%, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 2px, transparent 3px), linear-gradient(150deg, var(--primary-dark), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* ---- Pied de page ---- */
+    .site-footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.85);
+      padding: 2.5rem 1.25rem 1.75rem;
+    }
+    .footer-legal {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      padding-top: 1.5rem;
+    }
+    .footer-legal h2 {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .footer-legal p { color: rgba(255,255,255,0.65); margin-bottom: 0; }
+    .footer-credit {
+      text-align: center;
+      max-width: 780px;
+      margin: 1.5rem auto 0;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-credit a { color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body data-theme="gourmand">
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">📍 Condé-en-Normandie</p>
+    <h1>Aux Délices du Bocage</h1>
+    <p class="hero-tagline">Le pain et les gourmandises comme au temps de nos grands-mères</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="tel:+33231692418">📞 Appeler — 02 31 69 24 18</a>
+      <a class="btn btn-ghost" href="#contact">Nous contacter</a>
+    </div>
+  </div>
+  <nav class="hero-nav" aria-label="Navigation principale">
+    <a href="#services">Services</a>
+    <a href="#apropos">À propos</a>
+    <a href="#avis">Avis</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main>
+
+    <section id="services" class="section services">
+      <h2>Nos services</h2>
+      <div class="grid grid-services">
+        
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🥖</div>
+          <h3>Pains traditionnels</h3>
+          <p>Baguette « Tradition », pain de campagne au levain, pain aux céréales et pain de seigle, pétris et cuits sur place chaque jour.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🥐</div>
+          <h3>Viennoiseries maison</h3>
+          <p>Croissants, pains au chocolat et chaussons aux pommes pur beurre, façonnés à la main dès l&#39;aube.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🍰</div>
+          <h3>Pâtisseries de saison</h3>
+          <p>Tartes aux fruits du verger, entremets et éclairs revisités au fil des saisons, à l&#39;unité ou pour vos réceptions.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🧁</div>
+          <h3>Gâteaux sur commande</h3>
+          <p>Gâteaux d&#39;anniversaire, pièces montées et wedding cakes réalisés sur mesure, à commander une semaine à l&#39;avance.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🍞</div>
+          <h3>Formule snacking du midi</h3>
+          <p>Sandwichs sur pain maison, quiches et parts de pizza préparés chaque matin pour la pause déjeuner.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="apropos" class="section about">
+      <h2>À propos de Aux Délices du Bocage</h2>
+      <div class="about-copy">
+        <p>Depuis 2015, la famille Duval pétrit chaque nuit le pain de la boulangerie « Aux Délices du Bocage », sur la place du Champ de Foire à Condé-en-Normandie. Farines de meuniers locaux, levain naturel, cuisson au four à sole : rien n&#39;a changé depuis l&#39;ouverture.</p>
+<p>En vitrine, viennoiseries pur beurre, pâtisseries de saison et gâteaux sur commande pour les anniversaires, mariages et fêtes de famille. Une équipe de quatre personnes, dont deux apprentis formés sur place, accueille les clients du mardi au dimanche matin.</p>
+<p>« On ne fait pas dans la quantité, on fait dans le soin » : c&#39;est la devise affichée derrière le comptoir, et elle se sent dès la première bouchée.</p>
+      </div>
+    </section>
+
+    <section id="avis" class="section testimonials">
+      <h2>Ils nous font confiance</h2>
+      <div class="grid">
+        
+        <blockquote class="testimonial">
+          <p>Le meilleur pain au levain du secteur, et les croissants n&#39;ont rien à envier à ceux d&#39;une grande ville. Un vrai bonheur chaque matin.</p>
+          <cite>— Isabelle F., Condé-en-Normandie</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>Nous avons commandé notre gâteau de mariage ici : magnifique et délicieux, toute la famille en parle encore.</p>
+          <cite>— Marc T., Saint-Pierre-Tarentaine</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>Accueil chaleureux, produits impeccables, et toujours un petit conseil gourmand pour accompagner nos achats du dimanche.</p>
+          <cite>— Chantal B., Condé-en-Normandie</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="horaires" class="section hours">
+      <h2>Horaires d'ouverture</h2>
+      <ul class="hours-list">
+        <li>Mardi – Vendredi : 6h30 – 19h30</li>
+<li>Samedi : 6h30 – 19h30</li>
+<li>Dimanche : 6h30 – 13h00</li>
+<li>Lundi : fermé</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div>
+            <strong>Adresse</strong>
+            4 place du Champ de Foire, 14110 Condé-en-Normandie
+          </div>
+          <div>
+            <strong>Téléphone</strong>
+            <a href="tel:+33231692418">02 31 69 24 18</a>
+          </div>
+          <div>
+            <strong>E-mail</strong>
+            <a href="mailto:bonjour@delices-du-bocage.fr">bonjour@delices-du-bocage.fr</a>
+          </div>
+        </div>
+        <div class="contact-visual" aria-hidden="true">🥖</div>
+      </div>
+    </section>
+</main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <h2>Mentions légales</h2>
+        <p>
+          Aux Délices du Bocage — 4 place du Champ de Foire, 14110 Condé-en-Normandie<br>
+          SIRET : 000 000 000 00000<br>
+          Hébergement : à compléter lors de la mise en ligne (ex. Netlify Ireland / France).
+        </p>
+      </div>
+      <p class="footer-credit">Site conçu par <a href="../../agency/">Bocage Web</a></p>
+    </footer>
+</body>
+</html>

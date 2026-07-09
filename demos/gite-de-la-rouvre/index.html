@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Gîte de la Rouvre — Gîte et chambres d&#39;hôtes à Athis-Val-de-Rouvre</title>
+<meta name="description" content="Au bord de la rivière Rouvre, à deux pas de la Roche d&#39;Oëtre, le Gîte de la Rouvre accueille depuis 2012 les amoureux de nature dans une ancienne…">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%234b7a52%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2242%22%20font-size%3D%2232%22%20text-anchor%3D%22middle%22%3E%F0%9F%8C%BF%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Le Gîte de la Rouvre — Gîte et chambres d&#39;hôtes à Athis-Val-de-Rouvre">
+<meta property="og:description" content="Au bord de la rivière Rouvre, à deux pas de la Roche d&#39;Oëtre, le Gîte de la Rouvre accueille depuis 2012 les amoureux de nature dans une ancienne…">
+<meta property="og:site_name" content="Le Gîte de la Rouvre">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Le Gîte de la Rouvre",
+  "description": "Au bord de la rivière Rouvre, à deux pas de la Roche d'Oëtre, le Gîte de la Rouvre accueille depuis 2012 les amoureux de nature dans une ancienne dépendance de moulin restaurée avec soin par Nathalie et Éric Fontaine. Un gîte de 6 personnes et deux chambres d'hôtes, chacune avec vue sur les collines du bocage, pour un séjour au calme, entre randonnées, canoë sur la Rouvre et visites des marchés de producteurs locaux. Nathalie et Éric connaissent chaque sentier du coin et se font un plaisir de préparer un itinéraire sur mesure, avec toujours un panier de produits normands qui vous attend à l'arrivée.",
+  "telephone": "+33233964108",
+  "email": "contact@gite-rouvre.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Le Moulin, 61430 Athis-Val-de-Rouvre",
+    "addressLocality": "Athis-Val-de-Rouvre",
+    "addressCountry": "FR"
+  },
+  "areaServed": "Athis-Val-de-Rouvre"
+}
+</script>
+<style>
+:root {
+      --primary: #4b7a52;
+      --primary-dark: #345638;
+      --accent: #d9c48f;
+      --background: #f6f4ee;
+      --surface: #ffffff;
+      --text: #33402f;
+      --text-muted: #5c6b56;
+      --hero-text: #ffffff;
+      --radius: 24px;
+      --radius-lg: 32px;
+      --font-heading: 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--primary); }
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      margin: 0 0 0.6em;
+      line-height: 1.2;
+    }
+    h2 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem); margin-bottom: 1em; }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 1em; }
+    .section { padding: 3.5rem 1.25rem; max-width: 1080px; margin: 0 auto; }
+    .section > h2 { text-align: center; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap;
+    }
+
+    /* ---- En-tête / hero ---- */
+    .hero {
+      background: radial-gradient(ellipse at 20% 100%, rgba(255,255,255,0.12), transparent 55%), radial-gradient(ellipse at 90% 0%, rgba(255,255,255,0.10), transparent 50%), linear-gradient(160deg, var(--primary-dark), var(--primary));
+      color: var(--hero-text);
+      text-align: center;
+    }
+    .hero-inner { padding: 4.5rem 1.25rem 3rem; max-width: 780px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.14);
+      padding: 0.35em 0.9em;
+      border-radius: 999px;
+      margin-bottom: 1.4em;
+    }
+    .hero h1 {
+      color: var(--hero-text);
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3.1rem);
+      margin-bottom: 0.35em;
+    }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 1rem + 0.5vw, 1.35rem);
+      opacity: 0.92;
+      max-width: 46ch;
+      margin: 0 auto 2em;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.85em 1.6em;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      border: 2px solid transparent;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #1a1108; }
+    .btn-primary:hover { box-shadow: 0 10px 24px -8px rgba(0,0,0,0.45); }
+    .btn-ghost { background: transparent; color: var(--hero-text); border-color: rgba(255,255,255,0.55); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1.4rem;
+      background: rgba(0,0,0,0.16);
+      padding: 0.9rem 1rem;
+    }
+    .hero-nav a {
+      color: var(--hero-text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      opacity: 0.9;
+      padding: 0.2em 0.1em;
+      border-bottom: 2px solid transparent;
+    }
+    .hero-nav a:hover { opacity: 1; border-bottom-color: var(--accent); }
+
+    /* ---- Grilles génériques ---- */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .grid-services { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---- Services ---- */
+    .services { background: var(--surface); border-radius: var(--radius-lg); }
+    .card {
+      background: var(--background);
+      border: 1px solid rgba(75,122,82,0.18);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .card h3 { margin-bottom: 0.4em; }
+    .card p { color: var(--text-muted); margin-bottom: 0; }
+
+    /* ---- À propos ---- */
+    .about { text-align: center; }
+    .about-copy { max-width: 68ch; margin: 0 auto; text-align: left; }
+    .about-copy p { color: var(--text-muted); }
+
+    /* ---- Avis clients ---- */
+    .testimonials { background: var(--surface); border-radius: var(--radius-lg); }
+    .testimonial {
+      margin: 0;
+      background: var(--background);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border: 1px solid rgba(75,122,82,0.18);
+    }
+    .testimonial p { font-style: italic; color: var(--text); margin-bottom: 0.75em; }
+    .testimonial p::before { content: '\201C'; }
+    .testimonial p::after { content: '\201D'; }
+    .testimonial cite { font-style: normal; font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+
+    /* ---- Horaires ---- */
+    .hours-list {
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      max-width: 560px;
+      display: grid;
+      gap: 0.6rem;
+    }
+    .hours-list li {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(75,122,82,0.18);
+      padding: 0.85em 1.2em;
+      font-weight: 600;
+    }
+
+    /* ---- Contact ---- */
+    .contact-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      .contact-grid { grid-template-columns: 1.2fr 1fr; }
+    }
+    .contact-grid a { color: var(--primary); text-decoration: none; font-weight: 700; }
+    .contact-grid a:hover { text-decoration: underline; }
+    .contact-grid strong { display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.2em; }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid rgba(75,122,82,0.18);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+    .contact-visual {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(ellipse at 20% 100%, rgba(255,255,255,0.12), transparent 55%), radial-gradient(ellipse at 90% 0%, rgba(255,255,255,0.10), transparent 50%), linear-gradient(160deg, var(--primary-dark), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* ---- Pied de page ---- */
+    .site-footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.85);
+      padding: 2.5rem 1.25rem 1.75rem;
+    }
+    .footer-legal {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      padding-top: 1.5rem;
+    }
+    .footer-legal h2 {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .footer-legal p { color: rgba(255,255,255,0.65); margin-bottom: 0; }
+    .footer-credit {
+      text-align: center;
+      max-width: 780px;
+      margin: 1.5rem auto 0;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-credit a { color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body data-theme="sejour">
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">📍 Athis-Val-de-Rouvre</p>
+    <h1>Le Gîte de la Rouvre</h1>
+    <p class="hero-tagline">Une pause nature au cœur de la Suisse normande</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="tel:+33233964108">📞 Appeler — 02 33 96 41 08</a>
+      <a class="btn btn-ghost" href="#contact">Nous contacter</a>
+    </div>
+  </div>
+  <nav class="hero-nav" aria-label="Navigation principale">
+    <a href="#services">Services</a>
+    <a href="#apropos">À propos</a>
+    <a href="#avis">Avis</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main>
+
+    <section id="services" class="section services">
+      <h2>Nos services</h2>
+      <div class="grid grid-services">
+        
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🌿</div>
+          <h3>Gîte « Le Moulin » (6 personnes)</h3>
+          <p>Maison indépendante avec jardin clos, cheminée et vue sur la rivière : idéale pour un séjour en famille ou entre amis.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🛏️</div>
+          <h3>Chambre d&#39;hôtes « Le Bocage »</h3>
+          <p>Chambre double avec salle d&#39;eau privative, décoration en bois brut et lin naturel, petit-déjeuner compris.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🚲</div>
+          <h3>Chambre d&#39;hôtes « La Rivière »</h3>
+          <p>Chambre familiale pouvant accueillir jusqu&#39;à 4 personnes, avec vue directe sur la Rouvre.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🧺</div>
+          <h3>Location de vélos et de canoës</h3>
+          <p>Pour explorer les gorges de la Rouvre et les chemins de randonnée du Val de Rouvre à votre rythme.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🌳</div>
+          <h3>Panier petit-déjeuner et produits locaux</h3>
+          <p>Confitures maison, cidre et fromages de producteurs voisins, disponibles sur simple demande à votre arrivée.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="apropos" class="section about">
+      <h2>À propos de Le Gîte de la Rouvre</h2>
+      <div class="about-copy">
+        <p>Au bord de la rivière Rouvre, à deux pas de la Roche d&#39;Oëtre, le Gîte de la Rouvre accueille depuis 2012 les amoureux de nature dans une ancienne dépendance de moulin restaurée avec soin par Nathalie et Éric Fontaine.</p>
+<p>Un gîte de 6 personnes et deux chambres d&#39;hôtes, chacune avec vue sur les collines du bocage, pour un séjour au calme, entre randonnées, canoë sur la Rouvre et visites des marchés de producteurs locaux.</p>
+<p>Nathalie et Éric connaissent chaque sentier du coin et se font un plaisir de préparer un itinéraire sur mesure, avec toujours un panier de produits normands qui vous attend à l&#39;arrivée.</p>
+      </div>
+    </section>
+
+    <section id="avis" class="section testimonials">
+      <h2>Ils nous font confiance</h2>
+      <div class="grid">
+        
+        <blockquote class="testimonial">
+          <p>Un accueil formidable et un cadre à couper le souffle. Nous sommes repartis avec plein d&#39;adresses de balades, on reviendra c&#39;est certain.</p>
+          <cite>— Élodie et Thomas, Rennes</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>Le gîte est encore plus beau qu&#39;en photo, tout le confort et une vue magnifique sur la vallée. Les enfants ont adoré le canoë.</p>
+          <cite>— Famille Petit, Caen</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>Nathalie nous a concocté un itinéraire de randonnée sur mesure. Un vrai moment de calme, loin de tout, avec un accueil très humain.</p>
+          <cite>— Bernard M., Paris</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="horaires" class="section hours">
+      <h2>Horaires d'ouverture</h2>
+      <ul class="hours-list">
+        <li>Ouvert toute l&#39;année, sur réservation</li>
+<li>Réception : 8h00 – 20h00</li>
+<li>Arrivée (check-in) : à partir de 16h00</li>
+<li>Départ (check-out) : avant 11h00</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div>
+            <strong>Adresse</strong>
+            Le Moulin, 61430 Athis-Val-de-Rouvre
+          </div>
+          <div>
+            <strong>Téléphone</strong>
+            <a href="tel:+33233964108">02 33 96 41 08</a>
+          </div>
+          <div>
+            <strong>E-mail</strong>
+            <a href="mailto:contact@gite-rouvre.fr">contact@gite-rouvre.fr</a>
+          </div>
+        </div>
+        <div class="contact-visual" aria-hidden="true">🌿</div>
+      </div>
+    </section>
+</main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <h2>Mentions légales</h2>
+        <p>
+          Le Gîte de la Rouvre — Le Moulin, 61430 Athis-Val-de-Rouvre<br>
+          SIRET : 000 000 000 00000<br>
+          Hébergement : à compléter lors de la mise en ligne (ex. Netlify Ireland / France).
+        </p>
+      </div>
+      <p class="footer-credit">Site conçu par <a href="../../agency/">Bocage Web</a></p>
+    </footer>
+</body>
+</html>
