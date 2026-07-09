@@ -1,0 +1,62 @@
+{
+  "businessName": "Plomberie Lecomte",
+  "slug": "plomberie-lecomte",
+  "metier": "Plombier-chauffagiste",
+  "theme": "artisan",
+  "tagline": "Votre confort à l'année : chauffage, plomberie et dépannage rapide",
+  "town": "Flers",
+  "phone": "02 33 64 12 47",
+  "email": "contact@plomberie-lecomte.fr",
+  "address": "12 rue de la Gare, 61100 Flers",
+  "siret": "000 000 000 00000",
+  "description": [
+    "Installée à Flers depuis 2009, Plomberie Lecomte intervient chez les particuliers et les professionnels dans un rayon de 30 km : Flers, Briouze, La Ferté-Macé, Athis-Val-de-Rouvre et les communes alentour.",
+    "Christophe Lecomte, artisan RGE, et son équipe de deux compagnons interviennent aussi bien pour un robinet qui fuit que pour l'installation complète d'une chaudière ou d'une pompe à chaleur. Devis gratuit, travail soigné, et un interlocuteur unique du premier appel à la mise en service.",
+    "Nous privilégions des équipements fiables et des solutions durables, avec toujours un œil sur la facture d'énergie de nos clients."
+  ],
+  "services": [
+    {
+      "name": "Dépannage plomberie en urgence",
+      "description": "Fuite, canalisation bouchée, chasse d'eau qui ne marche plus : nous intervenons sous 24h, 7 jours sur 7 pour les urgences."
+    },
+    {
+      "name": "Installation et remplacement de chaudière",
+      "description": "Chaudières gaz, fioul, ou pompes à chaleur : conseil, installation et mise en service dans les règles de l'art, avec aides financières possibles."
+    },
+    {
+      "name": "Rénovation de salle de bain",
+      "description": "Douche à l'italienne, remplacement de baignoire, création de salle d'eau accessible : de l'étude à la pose, un seul artisan pour tout le chantier."
+    },
+    {
+      "name": "Entretien et contrat de maintenance",
+      "description": "Contrat d'entretien annuel de votre chaudière avec attestation obligatoire, pour un chauffage fiable et une consommation maîtrisée toute l'année."
+    },
+    {
+      "name": "Recherche de fuite",
+      "description": "Détection non destructive des fuites d'eau invisibles, avant qu'elles n'abîment vos murs ou votre facture."
+    },
+    {
+      "name": "Installation sanitaire complète",
+      "description": "WC, lavabos, robinetterie, adoucisseurs d'eau : équipement et mise aux normes de vos points d'eau."
+    }
+  ],
+  "openingHours": [
+    "Lundi – Vendredi : 8h00 – 18h00",
+    "Samedi : 9h00 – 12h00 (sur rendez-vous)",
+    "Dimanche : fermé — urgences au 02 33 64 12 47"
+  ],
+  "testimonials": [
+    {
+      "author": "Marie D., Flers",
+      "text": "Intervention le jour même pour une fuite sous l'évier, travail propre et prix annoncé respecté. Je recommande sans hésiter."
+    },
+    {
+      "author": "Jean-Pierre R., Briouze",
+      "text": "Christophe a remplacé notre vieille chaudière fioul par une pompe à chaleur. Explications claires, chantier rapide, et une vraie baisse sur nos factures depuis."
+    },
+    {
+      "author": "Sophie L., La Ferté-Macé",
+      "text": "Toujours ponctuel, toujours de bon conseil. C'est notre plombier depuis dix ans et on n'a jamais eu à s'en plaindre."
+    }
+  ]
+}

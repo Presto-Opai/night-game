@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bocage Web — Sites internet pour artisans et commerces du bocage normand</title>
+<meta name="description" content="Bocage Web crée des sites internet sur mesure pour les artisans, restaurants et gîtes du bocage normand. En ligne en 7 jours, sinon remboursé.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23234230%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2242%22%20font-size%3D%2230%22%20text-anchor%3D%22middle%22%3E%F0%9F%8C%B3%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Bocage Web — Sites internet pour artisans et commerces du bocage normand">
+<meta property="og:description" content="Votre site en ligne en 7 jours, sinon remboursé. Des sites clairs, rapides et abordables pour les artisans, restaurants et gîtes du bocage normand.">
+<meta property="og:site_name" content="Bocage Web">
+<style>
+  :root {
+    --forest: #1f3d2b;
+    --forest-dark: #13281c;
+    --green: #3d6b4a;
+    --green-light: #5c8a68;
+    --sand: #d9c48f;
+    --terracotta: #c1613a;
+    --terracotta-dark: #9c4c2c;
+    --cream: #faf7f0;
+    --surface: #ffffff;
+    --ink: #1c2620;
+    --ink-muted: #4c5a4f;
+    --radius: 16px;
+    --radius-lg: 26px;
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3, h4 {
+    font-family: inherit;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5em;
+  }
+  h2 { font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.3rem); }
+  h3 { font-size: 1.2rem; }
+  p { margin: 0 0 1em; }
+  ul { margin: 0; padding: 0; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+  .section { padding: 4.5rem 0; }
+  .section-head { max-width: 640px; margin: 0 auto 2.75rem; text-align: center; }
+  .section-head p { color: var(--ink-muted); font-size: 1.05rem; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    background: rgba(61,107,74,0.10);
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    margin-bottom: 1em;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.9em 1.7em;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--terracotta); color: #fff8f2; }
+  .btn-primary:hover { background: var(--terracotta-dark); box-shadow: 0 12px 28px -10px rgba(193,97,58,0.55); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+  .btn-outline { background: transparent; color: var(--forest); border-color: var(--forest); }
+  .btn-outline:hover { background: var(--forest); color: #fff; }
+
+  /* ---- Barre de navigation ---- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250,247,240,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(31,61,43,0.10);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+  .brand { display: flex; align-items: center; gap: 0.55em; font-weight: 800; font-size: 1.15rem; color: var(--forest); text-decoration: none; }
+  .brand-mark {
+    width: 2.1rem; height: 2.1rem;
+    border-radius: 8px;
+    background: linear-gradient(155deg, var(--forest), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+  }
+  .topnav { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; }
+  .topnav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.94rem;
+  }
+  .topnav a:hover { color: var(--green); }
+  .topnav .btn { padding: 0.6em 1.3em; font-size: 0.92rem; }
+
+  /* ---- Hero ---- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 0%, rgba(217,196,143,0.20), transparent 60%),
+      radial-gradient(ellipse 55% 60% at 100% 20%, rgba(92,138,104,0.35), transparent 55%),
+      linear-gradient(165deg, var(--forest-dark), var(--forest) 55%, var(--green) 130%);
+    color: #fff;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 100%, 100% 40%, 92% 55%, 84% 30%, 76% 58%, 68% 25%, 60% 55%, 52% 20%, 44% 58%, 36% 28%, 28% 55%, 20% 22%, 12% 58%, 4% 30%, 0 50%);
+  }
+  .hero-inner {
+    position: relative;
+    padding: 5.5rem 0 6rem;
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 1.5rem + 3vw, 3.4rem);
+    margin-bottom: 0.5em;
+  }
+  .hero h1 em { font-style: normal; color: var(--sand); }
+  .hero-lede {
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    color: rgba(255,255,255,0.92);
+    max-width: 52ch;
+    margin: 0 auto 2em;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; margin-bottom: 1.5rem; }
+  .hero-note { font-size: 0.88rem; color: rgba(255,255,255,0.68); }
+
+  /* ---- Pour qui ---- */
+  .audience-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .audience-grid { grid-template-columns: repeat(3, 1fr); } }
+  .audience-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    border: 1px solid rgba(31,61,43,0.08);
+    box-shadow: 0 14px 30px -20px rgba(31,61,43,0.35);
+  }
+  .audience-card .icon { font-size: 2.1rem; margin-bottom: 0.6rem; }
+  .audience-card p { color: var(--ink-muted); margin-bottom: 0; font-size: 0.96rem; }
+
+  /* ---- Processus ---- */
+  .process { background: var(--surface); }
+  .steps { display: grid; gap: 2rem; grid-template-columns: 1fr; counter-reset: step; }
+  @media (min-width: 780px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step { position: relative; text-align: center; padding: 0 0.5rem; }
+  .step-num {
+    width: 3rem; height: 3rem;
+    border-radius: 50%;
+    background: var(--forest);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 0 auto 1rem;
+  }
+  .step h3 { margin-bottom: 0.4em; }
+  .step p { color: var(--ink-muted); font-size: 0.95rem; }
+  @media (min-width: 780px) {
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: calc(50% + 2.3rem);
+      width: calc(100% - 4.6rem);
+      border-top: 2px dashed rgba(31,61,43,0.25);
+    }
+  }
+
+  /* ---- Tarifs ---- */
+  .pricing-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .pricing-grid { grid-template-columns: repeat(4, 1fr); } }
+  .price-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.9rem 1.6rem;
+    border: 1px solid rgba(31,61,43,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .price-card.featured {
+    border-color: var(--terracotta);
+    box-shadow: 0 18px 34px -18px rgba(193,97,58,0.45);
+    position: relative;
+  }
+  .price-card.featured::before {
+    content: 'Le plus choisi';
+    position: absolute;
+    top: -0.8em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.3em 0.9em;
+    border-radius: 999px;
+  }
+  .price-card h3 { font-size: 1.05rem; margin-bottom: 0.15em; }
+  .price-amount { font-size: 1.9rem; font-weight: 800; color: var(--forest); }
+  .price-amount small { font-size: 0.95rem; font-weight: 600; color: var(--ink-muted); }
+  .price-card ul { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.5rem 0 0; }
+  .price-card li {
+    list-style: none;
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    padding-left: 1.4em;
+    position: relative;
+  }
+  .price-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 800;
+  }
+
+  /* ---- Portfolio ---- */
+  .portfolio { background: var(--surface); }
+  .portfolio-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); } }
+  .portfolio-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(31,61,43,0.10);
+    background: var(--cream);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -18px rgba(31,61,43,0.4); }
+  .portfolio-thumb {
+    height: 130px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.6rem;
+    color: #fff;
+  }
+  .portfolio-thumb.artisan { background: linear-gradient(150deg, #131c26, #1f2d3d); }
+  .portfolio-thumb.gourmand { background: linear-gradient(150deg, #4b141c, #6b1f2a); }
+  .portfolio-thumb.sejour { background: linear-gradient(150deg, #345638, #4b7a52); }
+  .portfolio-body { padding: 1.25rem 1.4rem 1.5rem; }
+  .portfolio-body .kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); font-weight: 700; margin-bottom: 0.4em; }
+  .portfolio-body h3 { margin-bottom: 0.25em; }
+  .portfolio-body p { color: var(--ink-muted); font-size: 0.92rem; margin-bottom: 0.6em; }
+  .portfolio-link { font-size: 0.88rem; font-weight: 700; color: var(--terracotta); }
+
+  /* ---- À propos ---- */
+  .about-section .wrap { display: grid; gap: 2.5rem; grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 820px) { .about-section .wrap { grid-template-columns: 0.85fr 1.15fr; } }
+  .about-portrait {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.14), transparent 45%),
+      linear-gradient(150deg, var(--forest), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .about-copy p { color: var(--ink-muted); }
+  .about-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+  .about-badges span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(61,107,74,0.10);
+    color: var(--forest);
+    padding: 0.4em 0.9em;
+    border-radius: 999px;
+  }
+
+  /* ---- FAQ ---- */
+  .faq { background: var(--surface); }
+  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+  .faq-list details {
+    border: 1px solid rgba(31,61,43,0.12);
+    border-radius: var(--radius);
+    padding: 0.3rem 1.4rem;
+    background: var(--cream);
+  }
+  .faq-list summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 1rem 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--green);
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+  .faq-list details[open] summary::after { transform: rotate(45deg); }
+  .faq-list p { color: var(--ink-muted); padding-bottom: 1.1rem; margin: 0; }
+
+  /* ---- Contact ---- */
+  .contact-section {
+    background: linear-gradient(165deg, var(--forest-dark), var(--forest));
+    color: #fff;
+  }
+  .contact-section .section-head p { color: rgba(255,255,255,0.82); }
+  .contact-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: var(--radius-lg);
+    padding: 2.2rem;
+    display: grid;
+    gap: 1.2rem;
+  }
+  @media (min-width: 600px) { .contact-card { grid-template-columns: 1fr 1fr; } }
+  .contact-card strong { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sand); margin-bottom: 0.3em; }
+  .contact-card a { text-decoration: none; font-weight: 700; font-size: 1.05rem; color: #fff; }
+  .contact-card a:hover { text-decoration: underline; }
+  .placeholder-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: rgba(193,97,58,0.85);
+    color: #fff;
+    padding: 0.15em 0.55em;
+    border-radius: 5px;
+    margin-left: 0.5em;
+    vertical-align: middle;
+  }
+
+  /* ---- Pied de page ---- */
+  .site-footer { background: var(--forest-dark); color: rgba(255,255,255,0.75); padding: 2.75rem 0 2rem; }
+  .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+  .footer-brand { max-width: 340px; }
+  .footer-brand .brand { color: #fff; margin-bottom: 0.6em; }
+  .footer-brand p { color: rgba(255,255,255,0.62); font-size: 0.9rem; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 2.5rem; }
+  .footer-links h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.85); margin-bottom: 0.8em; }
+  .footer-links ul { display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.92rem; }
+  .footer-links a:hover { color: #fff; }
+  .footer-legal {
+    border-top: 1px solid rgba(255,255,255,0.14);
+    padding-top: 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+  }
+  .footer-legal p { margin-bottom: 0.4em; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">🌳</span>
+      Bocage Web
+    </a>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="#offre">L'offre</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#apropos">À propos</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-outline" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow" style="background:rgba(255,255,255,0.14); color:#fff;">Des sites internet pour les artisans et commerces du bocage normand</p>
+        <h1>Votre site en ligne en <em>7 jours</em>, sinon remboursé</h1>
+        <p class="hero-lede">Un site professionnel, rapide et clair pour votre activité — sans jargon, sans mauvaise surprise, conçu par un freelance basé juste à côté, à Athis-de-l'Orne.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Demander mon site</a>
+          <a class="btn btn-ghost" href="#realisations">Voir des exemples</a>
+        </div>
+        <p class="hero-note">990 € pour un site vitrine complet · hébergement à partir de 49 €/mois</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section audience" id="pour-qui">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Pour qui</p>
+        <h2>Un site pensé pour votre métier, pas pour un modèle générique</h2>
+        <p>Bocage Web s'adresse aux indépendants et petites entreprises du bocage normand qui n'ont pas le temps — ni l'envie — de se battre avec un logiciel de site internet.</p>
+      </div>
+      <div class="audience-grid">
+        <article class="audience-card">
+          <div class="icon" aria-hidden="true">🔨</div>
+          <h3>Artisans</h3>
+          <p>Plombiers, électriciens, menuisiers, couvreurs&nbsp;: un site qui inspire confiance et fait sonner le téléphone dès la page d'accueil.</p>
+        </article>
+        <article class="audience-card">
+          <div class="icon" aria-hidden="true">🥖</div>
+          <h3>Restaurants &amp; commerces gourmands</h3>
+          <p>Boulangeries, restaurants, primeurs&nbsp;: horaires à jour, menu et avis clients visibles au premier coup d'œil, y compris sur mobile.</p>
+        </article>
+        <article class="audience-card">
+          <div class="icon" aria-hidden="true">🏡</div>
+          <h3>Gîtes &amp; chambres d'hôtes</h3>
+          <p>Une vitrine chaleureuse qui donne envie de réserver, avec vos coordonnées et vos disponibilités toujours à portée de main.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="processus">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Comment ça marche</p>
+        <h2>Trois étapes, une semaine, zéro complication</h2>
+        <p>Pas de formulaire à remplir seul pendant des heures&nbsp;: on avance ensemble, et c'est moi qui construis le site.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>RDV &amp; photos</h3>
+          <p>Je viens chez vous (45 minutes)&nbsp;: quelques photos, vos horaires, vos services et deux ou trois avis clients à recopier.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Je fabrique votre site</h3>
+          <p>Je mets en forme votre contenu avec un thème adapté à votre métier&nbsp;: solide pour un artisan, gourmand pour une table, apaisé pour un gîte.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>En ligne en 7 jours</h3>
+          <p>Vous validez, je mets en ligne avec votre nom de domaine. Votre site est visible sur Google et sur mobile dès le septième jour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pricing" id="offre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Tarifs</p>
+        <h2>Une offre simple, sans engagement caché</h2>
+        <p>Un prix fixe pour la création, un abonnement clair pour la suite. Aucune commission cachée, aucun palier surprise.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="price-card">
+          <h3>Site « Essentiel »</h3>
+          <p class="price-amount">990&nbsp;€</p>
+          <ul>
+            <li>Site vitrine 1 page longue</li>
+            <li>Présentation, services, avis</li>
+            <li>Horaires et contact cliquables</li>
+            <li>Mentions légales incluses</li>
+            <li>Référencement local de base</li>
+          </ul>
+        </article>
+        <article class="price-card featured">
+          <h3>Site « Pro »</h3>
+          <p class="price-amount">1&nbsp;490&nbsp;€</p>
+          <ul>
+            <li>Tout le contenu du site Essentiel</li>
+            <li>Galerie photos</li>
+            <li>Formulaire de demande de devis</li>
+            <li>Une page dédiée par service</li>
+            <li>Suivi des statistiques de visite</li>
+          </ul>
+        </article>
+        <article class="price-card">
+          <h3>Maintenance &amp; hébergement</h3>
+          <p class="price-amount">49&nbsp;€<small>/mois</small></p>
+          <ul>
+            <li>Hébergement &amp; nom de domaine</li>
+            <li>2 modifications mineures par mois</li>
+            <li>Sauvegardes régulières</li>
+            <li>Sans engagement au-delà du 1ᵉʳ mois</li>
+          </ul>
+        </article>
+        <article class="price-card">
+          <h3>Fiche Google Business</h3>
+          <p class="price-amount">290&nbsp;€</p>
+          <ul>
+            <li>Création ou optimisation de la fiche</li>
+            <li>Fiche Google Maps complète</li>
+            <li>Stratégie de collecte d'avis clients</li>
+            <li>Idéal en complément d'un site</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section portfolio" id="realisations">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Réalisations</p>
+        <h2>Trois exemples, trois univers</h2>
+        <p>Chaque site est généré à partir de la même fabrique, avec un thème visuel différent selon le métier. Cliquez pour visiter les démonstrations.</p>
+      </div>
+      <div class="portfolio-grid">
+        <a class="portfolio-card" href="../demos/plomberie-lecomte/">
+          <div class="portfolio-thumb artisan" aria-hidden="true">🔧</div>
+          <div class="portfolio-body">
+            <p class="kicker">Thème Artisan</p>
+            <h3>Plomberie Lecomte</h3>
+            <p>Plombier-chauffagiste à Flers — solide, direct, orienté appel téléphonique.</p>
+            <span class="portfolio-link">Voir la démo →</span>
+          </div>
+        </a>
+        <a class="portfolio-card" href="../demos/aux-delices-du-bocage/">
+          <div class="portfolio-thumb gourmand" aria-hidden="true">🥖</div>
+          <div class="portfolio-body">
+            <p class="kicker">Thème Gourmand</p>
+            <h3>Aux Délices du Bocage</h3>
+            <p>Boulangerie-pâtisserie à Condé-en-Normandie — chaleureux, gourmand, typographie élégante.</p>
+            <span class="portfolio-link">Voir la démo →</span>
+          </div>
+        </a>
+        <a class="portfolio-card" href="../demos/gite-de-la-rouvre/">
+          <div class="portfolio-thumb sejour" aria-hidden="true">🌿</div>
+          <div class="portfolio-body">
+            <p class="kicker">Thème Séjour</p>
+            <h3>Le Gîte de la Rouvre</h3>
+            <p>Gîte &amp; chambres d'hôtes à Athis-Val-de-Rouvre — apaisé, aéré, tourné vers la réservation.</p>
+            <span class="portfolio-link">Voir la démo →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-section" id="apropos">
+    <div class="wrap">
+      <div class="about-portrait" aria-hidden="true">🧑‍💻</div>
+      <div class="about-copy">
+        <p class="eyebrow">À propos</p>
+        <h2>Un freelance du coin, pas une agence lointaine</h2>
+        <p>Bocage Web, c'est une seule personne&nbsp;: basée à Athis-de-l'Orne, je conçois et livre chaque site moi-même, sans sous-traitance ni ticket de support anonyme.</p>
+        <p>La proximité change tout&nbsp;: je peux passer chez vous pour les photos, vous appeler directement pour une modification, et vous connaissez la personne qui répond au téléphone. Pas de plateforme, pas d'abonnement à l'étranger&nbsp;: un interlocuteur unique, dans le bocage, pour le bocage.</p>
+        <div class="about-badges">
+          <span>📍 Basé à Athis-de-l'Orne</span>
+          <span>🤝 Rendez-vous chez vous</span>
+          <span>⚡ Livraison en 7 jours</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions fréquentes</p>
+        <h2>Tout ce qu'on me demande avant de signer</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Le site est-il vraiment en ligne en 7 jours&nbsp;?</summary>
+          <p>Oui, à condition de me transmettre vos informations (photos, horaires, services, avis) lors du rendez-vous initial. Le délai court à partir de ce moment-là&nbsp;: si je ne tiens pas les 7 jours, le site « Essentiel » vous est remboursé.</p>
+        </details>
+        <details>
+          <summary>Le site m'appartient-il&nbsp;?</summary>
+          <p>Oui. Le contenu, le nom de domaine et le design finalisé vous appartiennent. L'abonnement de 49&nbsp;€/mois couvre l'hébergement, les sauvegardes et les petites modifications&nbsp;: il n'est pas obligatoire pour garder votre site, mais il en assure le bon fonctionnement au quotidien.</p>
+        </details>
+        <details>
+          <summary>Je n'ai pas de photos, est-ce un problème&nbsp;?</summary>
+          <p>Non. Je passe avec mon appareil photo lors du rendez-vous initial et je réalise des prises de vue simples de votre local, de vos réalisations ou de vos produits, incluses dans la prestation.</p>
+        </details>
+        <details>
+          <summary>Quelle est la durée d'engagement&nbsp;?</summary>
+          <p>Aucune durée minimale sur l'abonnement de maintenance&nbsp;: vous pouvez l'arrêter à tout moment. La création du site (990&nbsp;€ ou 1&nbsp;490&nbsp;€) est un paiement unique, sans engagement ultérieur.</p>
+        </details>
+        <details>
+          <summary>Comment se passent les mises à jour&nbsp;?</summary>
+          <p>Un simple appel, SMS ou e-mail suffit&nbsp;: nouvel horaire, nouveau tarif, nouvelle photo. Les modifications mineures sont incluses dans l'abonnement (2 par mois), les refontes plus importantes sont devisées à part.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" style="background:rgba(255,255,255,0.14); color:#fff;">Contact</p>
+        <h2>Parlons de votre projet</h2>
+        <p>Un appel de dix minutes suffit pour savoir si Bocage Web est fait pour votre activité.</p>
+      </div>
+      <div class="contact-card">
+        <div>
+          <strong>Téléphone</strong>
+          <a href="tel:+33600000000">06 00 00 00 00<span class="placeholder-tag">à remplacer</span></a>
+        </div>
+        <div>
+          <strong>E-mail</strong>
+          <a href="mailto:contact@bocageweb.fr">contact@bocageweb.fr<span class="placeholder-tag">à remplacer</span></a>
+        </div>
+        <div>
+          <strong>Secteur</strong>
+          <span style="font-weight:700; font-size:1.05rem;">Rayon de 40&nbsp;km autour d'Athis-de-l'Orne</span>
+        </div>
+        <div>
+          <strong>Réponse</strong>
+          <span style="font-weight:700; font-size:1.05rem;">Sous 24h ouvrées</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">🌳</span>
+          Bocage Web
+        </a>
+        <p>Des sites internet pour les artisans et commerces du bocage normand. Conception, hébergement et suivi assurés par un freelance basé à Athis-de-l'Orne.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Le site</h4>
+          <ul>
+            <li><a href="#offre">Tarifs</a></li>
+            <li><a href="#realisations">Réalisations</a></li>
+            <li><a href="#apropos">À propos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Démonstrations</h4>
+          <ul>
+            <li><a href="../demos/plomberie-lecomte/">Plomberie Lecomte</a></li>
+            <li><a href="../demos/aux-delices-du-bocage/">Aux Délices du Bocage</a></li>
+            <li><a href="../demos/gite-de-la-rouvre/">Le Gîte de la Rouvre</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p><strong>Mentions légales</strong> — Bocage Web, entreprise individuelle (micro-entreprise) en cours d'immatriculation. Adresse&nbsp;: à compléter, Athis-de-l'Orne (61430). SIRET&nbsp;: à compléter dès l'immatriculation. Directeur de la publication&nbsp;: à compléter. Hébergement&nbsp;: à compléter lors de la mise en ligne (ex. Netlify Ireland / France).</p>
+      <p>© 2026 Bocage Web. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
