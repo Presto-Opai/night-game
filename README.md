@@ -1,10 +1,29 @@
-# Bocage Web — fabrique de sites pour artisans et commerces normands
+# Objectif 40 000 € en 6 mois — trois pistes, un dépôt
 
-Ce dépôt contient tout ce qu'il faut pour vendre et livrer des sites internet
-à des artisans, restaurants et gîtes du bocage normand en quelques heures de
-travail par client.
+Ce dépôt contient **trois activités complémentaires**, chacune avec son outil
+et son plan d'affaires. Elles partagent la même clientèle et se renforcent
+mutuellement (un client site devient client contenu, les articles SEO font
+vivre la boutique de cartes du ciel, etc.).
 
-Il contient trois choses :
+| Piste | Quoi | Outils | Plan |
+|---|---|---|---|
+| 1. Sites locaux | Vendre des sites aux artisans, restaurants et gîtes du bocage | [`agency/`](./agency/index.html) (vitrine), [`factory/`](./factory/build.js) (fabrique), [`demos/`](./demos/index.html) | [`PLAN.md`](./PLAN.md) |
+| 2. Rédaction web | Passer des articles « au mot » aux abonnements de contenu SEO | [`redaction/index.html`](./redaction/index.html) (offre), [`redaction/studio.html`](./redaction/studio.html) (Studio SEO privé) | [`PLAN-REDACTION.md`](./PLAN-REDACTION.md) |
+| 3. Cartes du ciel | Produit cadeau : l'affiche du vrai ciel d'une nuit précise | [`etoiles/index.html`](./etoiles/index.html) (générateur, `node etoiles/build.js` pour régénérer) | [`PLAN-ETOILES.md`](./PLAN-ETOILES.md) |
+
+La piste 2 s'appuie sur l'activité existante de micro-entrepreneur en
+rédaction web (rien à créer administrativement). La piste 3 est la plus
+risquée mais vise la saison des cadeaux (octobre–décembre) ; sa production
+par commande est quasi nulle. Tous les outils sont autonomes : aucun
+`npm install`, aucune requête externe, tout fonctionne hors ligne.
+
+---
+
+## Piste 1 — Bocage Web, fabrique de sites pour artisans et commerces
+
+Tout ce qu'il faut pour vendre et livrer des sites internet à des artisans,
+restaurants et gîtes du bocage normand en quelques heures de travail par
+client :
 
 1. **`agency/`** — la vitrine de l'activité elle-même (« Bocage Web »), la
    page qui sert à vendre l'offre aux prospects.
@@ -196,7 +215,9 @@ ligne, personnaliser :
 
 ```
 .
-├── PLAN.md                  # Plan d'affaires (ne pas modifier ici)
+├── PLAN.md                  # Plan d'affaires piste 1 (sites locaux)
+├── PLAN-REDACTION.md         # Plan d'affaires piste 2 (abonnements contenus SEO)
+├── PLAN-ETOILES.md           # Plan d'affaires piste 3 (cartes du ciel)
 ├── README.md                 # Ce fichier
 ├── agency/
 │   └── index.html             # Vitrine de l'activité Bocage Web
@@ -205,10 +226,20 @@ ligne, personnaliser :
 │   ├── plomberie-lecomte/index.html
 │   ├── aux-delices-du-bocage/index.html
 │   └── gite-de-la-rouvre/index.html
-└── factory/
-    ├── build.js                # Générateur de sites (zéro dépendance)
-    └── clients/                 # Un fichier JSON par client
-        ├── plomberie-lecomte.json
-        ├── aux-delices-du-bocage.json
-        └── gite-de-la-rouvre.json
+├── factory/
+│   ├── build.js                # Générateur de sites (zéro dépendance)
+│   └── clients/                 # Un fichier JSON par client
+│       ├── plomberie-lecomte.json
+│       ├── aux-delices-du-bocage.json
+│       └── gite-de-la-rouvre.json
+├── redaction/
+│   ├── index.html              # Page d'offre rédaction SEO (abonnements)
+│   └── studio.html             # Studio SEO : brief, analyse, métadonnées (100 % local)
+└── etoiles/
+    ├── index.html              # Générateur de cartes du ciel (généré, autonome)
+    ├── app.template.html       # Source de l'application (à éditer, puis rebuild)
+    ├── build.js                # Injecte les données -> index.html
+    ├── test-astro.js           # Vérifications astronomiques
+    ├── README.md               # Doc dédiée (rebuild, données, impression)
+    └── data/                   # Catalogue d'étoiles + constellations (CC BY-SA)
 ```
