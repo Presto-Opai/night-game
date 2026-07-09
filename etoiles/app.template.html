@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Carte de Votre Ciel — générateur de poster du ciel étoilé</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e7e4dc;
+    color: #1c1c1c;
+  }
+  .app { display: flex; min-height: 100vh; }
+
+  /* ---- Panneau de contrôle ---- */
+  aside.panel-controls {
+    flex: 0 0 400px;
+    width: 400px;
+    background: #14161f;
+    color: #e8e6de;
+    padding: 32px 28px 24px;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+  aside.panel-controls h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+    color: #f0efe8;
+  }
+  aside.panel-controls p.tagline {
+    margin: 0 0 28px;
+    font-size: 13px;
+    color: #9a9a9a;
+    line-height: 1.5;
+  }
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 22px;
+  }
+  fieldset legend {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    color: #d9c58a;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #2a2d3a;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9a9a9a;
+    margin: 14px 0 6px;
+  }
+  label:first-of-type { margin-top: 4px; }
+  input[type="text"],
+  input[type="number"],
+  input[type="datetime-local"],
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    background: #1f2230;
+    border: 1px solid #333747;
+    color: #f0efe8;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  input:focus, select:focus { outline: 1px solid #d9c58a; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: #cfcfc7;
+  }
+  .toggle-row input { margin: 0; }
+  .btn {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+  }
+  .btn-primary { background: #d9c58a; color: #14161f; }
+  .btn-primary:hover { background: #e6d49a; }
+  .btn-secondary { background: transparent; border: 1px solid #4a4e60; color: #e8e6de; }
+  .btn-secondary:hover { border-color: #d9c58a; color: #d9c58a; }
+  p.credit {
+    margin: 28px 0 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #6a6a6a;
+    border-top: 1px solid #2a2d3a;
+    padding-top: 14px;
+  }
+  p.credit a { color: #6a6a6a; }
+
+  /* ---- Aperçu ---- */
+  main.panel-preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    overflow: auto;
+    background:
+      radial-gradient(ellipse at 50% 20%, #f1efe8 0%, #e2ded3 70%, #d8d3c5 100%);
+  }
+  #posterWrap { width: min(100%, 560px); }
+  svg#poster {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.4), 0 4px 14px rgba(0,0,0,0.25);
+  }
+
+  @media (max-width: 860px) {
+    .app { flex-direction: column; }
+    aside.panel-controls { width: 100%; flex: none; max-height: none; }
+    main.panel-preview { padding: 32px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="panel-controls" id="controls">
+    <h1>La Carte de Votre Ciel</h1>
+    <p class="tagline">Le ciel exact au-dessus d'un lieu, à l'instant précis d'une naissance, d'une rencontre ou d'un mariage — prêt à imprimer.</p>
+
+    <fieldset>
+      <legend>Date &amp; lieu</legend>
+
+      <label for="inputDateTime">Date et heure locales</label>
+      <input type="datetime-local" id="inputDateTime" value="2000-01-01T00:00">
+
+      <label for="inputOffset">Fuseau horaire (décalage UTC)</label>
+      <select id="inputOffset"></select>
+
+      <label for="inputPlace">Lieu</label>
+      <select id="inputPlace"></select>
+
+      <div class="row-2">
+        <div>
+          <label for="inputLat">Latitude</label>
+          <input type="number" id="inputLat" step="0.0001" value="48.81">
+        </div>
+        <div>
+          <label for="inputLon">Longitude</label>
+          <input type="number" id="inputLon" step="0.0001" value="-0.50">
+        </div>
+      </div>
+
+      <label for="inputPlaceLabel">Nom du lieu affiché sur l'affiche</label>
+      <input type="text" id="inputPlaceLabel" value="Athis-Val-de-Rouvre">
+    </fieldset>
+
+    <fieldset>
+      <legend>Textes</legend>
+
+      <label for="inputTitle">Titre</label>
+      <input type="text" id="inputTitle" value="Le ciel étoilé">
+
+      <label for="inputSubtitle">Sous-titre / message</label>
+      <input type="text" id="inputSubtitle" value="La nuit où tout a commencé">
+    </fieldset>
+
+    <fieldset>
+      <legend>Style</legend>
+
+      <label for="inputTheme">Thème</label>
+      <select id="inputTheme">
+        <option value="nuit-profonde" selected>Nuit profonde</option>
+        <option value="bleu-minuit">Bleu minuit</option>
+        <option value="noir-or">Noir &amp; or</option>
+      </select>
+
+      <div class="toggle-row">
+        <input type="checkbox" id="toggleConstellations" checked>
+        <label style="margin:0; text-transform:none; letter-spacing:0; font-size:13.5px; color:#cfcfc7;" for="toggleConstellations">Lignes des constellations</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="toggleGrid">
+        <label style="margin:0; text-transform:none; letter-spacing:0; font-size:13.5px; color:#cfcfc7;" for="toggleGrid">Grille altitude / azimut</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="toggleCardinals" checked>
+        <label style="margin:0; text-transform:none; letter-spacing:0; font-size:13.5px; color:#cfcfc7;" for="toggleCardinals">Points cardinaux (N/S/E/O)</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="toggleColors" checked>
+        <label style="margin:0; text-transform:none; letter-spacing:0; font-size:13.5px; color:#cfcfc7;" for="toggleColors">Couleurs réelles des étoiles</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Export</legend>
+      <button class="btn btn-primary" id="btnDownloadSVG" type="button">Télécharger SVG</button>
+      <button class="btn btn-secondary" id="btnDownloadPNG" type="button">Télécharger PNG haute résolution (3000 px)</button>
+    </fieldset>
+
+    <p class="credit">Données étoiles et constellations&#8239;: catalogue HYG (licence CC&#8239;BY-SA&#8239;2.5), via le projet d3-celestial. Calcul astronomique effectué localement, aucune donnée envoyée.</p>
+  </aside>
+
+  <main class="panel-preview">
+    <div id="posterWrap">
+      <svg id="poster" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 2000" width="1500" height="2000">
+        <defs>
+          <radialGradient id="skyGradient" cx="50%" cy="42%" r="65%">
+            <stop id="skyGradientInner" offset="0%" stop-color="#141a2e"/>
+            <stop id="skyGradientOuter" offset="100%" stop-color="#05070d"/>
+          </radialGradient>
+          <clipPath id="skyClip">
+            <circle cx="750" cy="760" r="600"/>
+          </clipPath>
+        </defs>
+
+        <rect id="posterBg" x="0" y="0" width="1500" height="2000" fill="#0b0e1a"/>
+        <circle id="skyBgCircle" cx="750" cy="760" r="600" fill="url(#skyGradient)"/>
+
+        <g id="gridGroup" clip-path="url(#skyClip)"></g>
+        <g id="constellationsGroup" clip-path="url(#skyClip)"></g>
+        <g id="starsGroup" clip-path="url(#skyClip)"></g>
+
+        <circle id="skyRingOuter" cx="750" cy="760" r="600" fill="none" stroke="#c9d3e0" stroke-width="2.2"/>
+        <circle id="skyRingInner" cx="750" cy="760" r="590" fill="none" stroke="#c9d3e0" stroke-width="1" opacity="0.45"/>
+
+        <g id="cardinalGroup"></g>
+
+        <text id="posterTitle" x="750" y="1460" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" letter-spacing="8" fill="#f5f2ea">LE CIEL ÉTOILÉ</text>
+        <text id="posterSubtitle" x="750" y="1524" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#b9c2d0">La nuit où tout a commencé</text>
+        <line id="posterDivider" x1="655" y1="1558" x2="845" y2="1558" stroke="#c9d3e0" stroke-width="1" opacity="0.6"/>
+        <text id="posterInfo" x="750" y="1606" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" letter-spacing="2" fill="#b9c2d0">ATHIS-VAL-DE-ROUVRE · 1 JANVIER 2000, 00H00 · 48.81° N, 0.50° O</text>
+
+        <text id="posterFooter" x="750" y="1928" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="1" fill="#888888" opacity="0.55">Données étoiles : catalogue HYG (CC BY-SA 2.5) via d3-celestial · La Carte de Votre Ciel</text>
+      </svg>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ------------------------------------------------------------------
+  // Données étoiles / constellations (injectées par build.js)
+  // ------------------------------------------------------------------
+  var STARS = /*__STARS_JSON__*/;
+  var CONSTELLATIONS = /*__CONSTELLATIONS_JSON__*/;
+
+  // ------------------------------------------------------------------
+  // Astronomie
+  // ------------------------------------------------------------------
+  function toRad(deg) { return deg * Math.PI / 180; }
+  function toDeg(rad) { return rad * 180 / Math.PI; }
+  function norm360(deg) { var d = deg % 360; if (d < 0) d += 360; return d; }
+
+  // Date UTC (en millisecondes epoch) -> jour julien
+  function julianDate(utcMillis) {
+    return utcMillis / 86400000 + 2440587.5;
+  }
+
+  // Temps sidéral de Greenwich, en degrés
+  function gmstDeg(jd) {
+    var T = (jd - 2451545.0) / 36525;
+    var g = 280.46061837 + 360.98564736629 * (jd - 2451545.0) +
+      0.000387933 * T * T - (T * T * T) / 38710000;
+    return norm360(g);
+  }
+
+  // Temps sidéral local, en degrés (longitude Est positive)
+  function lstDeg(gDeg, lonDeg) {
+    return norm360(gDeg + lonDeg);
+  }
+
+  // Coordonnées équatoriales -> horizontales (altitude, azimut depuis le nord, sens horaire)
+  function horizontal(raDeg, decDeg, lstD, latDeg) {
+    var H = norm360(lstD - raDeg);
+    if (H > 180) H -= 360;
+    var Hrad = toRad(H);
+    var decRad = toRad(decDeg);
+    var latRad = toRad(latDeg);
+    var sinAlt = Math.sin(decRad) * Math.sin(latRad) + Math.cos(decRad) * Math.cos(latRad) * Math.cos(Hrad);
+    var alt = Math.asin(Math.max(-1, Math.min(1, sinAlt)));
+    var y = Math.sin(Hrad);
+    var x = Math.cos(Hrad) * Math.sin(latRad) - Math.tan(decRad) * Math.cos(latRad);
+    var az = norm360(toDeg(Math.atan2(y, x)) + 180);
+    return { alt: toDeg(alt), az: az };
+  }
+
+  // Expose pour les vérifications (chargé aussi tel quel dans test-astro.js)
+  window.Astro = { toRad: toRad, toDeg: toDeg, norm360: norm360, julianDate: julianDate, gmstDeg: gmstDeg, lstDeg: lstDeg, horizontal: horizontal };
+
+  // ------------------------------------------------------------------
+  // Projection azimutale équidistante (zénith au centre)
+  // Le ciel est vu "de dessous" : le nord est en haut, l'est est à
+  // GAUCHE sur la carte (miroir), comme sur un planisphère classique.
+  // ------------------------------------------------------------------
+  var CX = 750, CY = 760, R_MAP = 600;
+
+  function project(azDeg, altDeg) {
+    var r = R_MAP * (90 - altDeg) / 90;
+    var azRad = toRad(azDeg);
+    return { x: CX - r * Math.sin(azRad), y: CY - r * Math.cos(azRad) };
+  }
+
+  // ------------------------------------------------------------------
+  // Lieux prédéfinis
+  // ------------------------------------------------------------------
+  var PLACES = [
+    { name: "Athis-Val-de-Rouvre", lat: 48.81, lon: -0.50 },
+    { name: "Flers", lat: 48.7500, lon: -0.5667 },
+    { name: "Caen", lat: 49.1829, lon: -0.3707 },
+    { name: "Paris", lat: 48.8566, lon: 2.3522 },
+    { name: "Lyon", lat: 45.7640, lon: 4.8357 },
+    { name: "Marseille", lat: 43.2965, lon: 5.3698 },
+    { name: "Bordeaux", lat: 44.8378, lon: -0.5792 },
+    { name: "Lille", lat: 50.6292, lon: 3.0573 },
+    { name: "Nantes", lat: 47.2184, lon: -1.5536 },
+    { name: "Strasbourg", lat: 48.5734, lon: 7.7521 },
+    { name: "Toulouse", lat: 43.6047, lon: 1.4442 },
+    { name: "Rennes", lat: 48.1173, lon: -1.6778 },
+    { name: "Bruxelles", lat: 50.8503, lon: 4.3517 },
+    { name: "Genève", lat: 46.2044, lon: 6.1432 },
+    { name: "Montréal", lat: 45.5019, lon: -73.5674 }
+  ];
+
+  // ------------------------------------------------------------------
+  // Thèmes
+  // ------------------------------------------------------------------
+  var THEMES = {
+    "nuit-profonde": {
+      bg: "#0b0e1a", gradient: ["#141a2e", "#05070d"],
+      ring: "#c9d3e0", ringOpacity: 0.4,
+      textPrimary: "#f5f2ea", textSecondary: "#b9c2d0",
+      starBase: "#ffffff", accent: "#c9d3e0"
+    },
+    "bleu-minuit": {
+      bg: "#0d1633", gradient: ["#182747", "#060b1c"],
+      ring: "#d9c58a", ringOpacity: 0.45,
+      textPrimary: "#f7f3e8", textSecondary: "#cdbd8f",
+      starBase: "#fff8ec", accent: "#d9c58a"
+    },
+    "noir-or": {
+      bg: "#000000", gradient: ["#100c02", "#000000"],
+      ring: "#caa53d", ringOpacity: 0.6,
+      textPrimary: "#f3e3b8", textSecondary: "#caa53d",
+      starBase: "#f5dfa6", accent: "#caa53d"
+    }
+  };
+
+  // ------------------------------------------------------------------
+  // Couleur d'étoile selon l'indice de couleur B-V
+  // ------------------------------------------------------------------
+  var BV_STOPS = [
+    [-0.4, [170, 191, 255]],
+    [0.0, [202, 216, 255]],
+    [0.4, [255, 255, 255]],
+    [0.8, [255, 244, 234]],
+    [1.4, [255, 210, 161]],
+    [2.0, [255, 181, 107]]
+  ];
+
+  function bvToColor(bvStr) {
+    var bv = parseFloat(bvStr);
+    if (isNaN(bv)) return null;
+    var c = Math.max(BV_STOPS[0][0], Math.min(BV_STOPS[BV_STOPS.length - 1][0], bv));
+    for (var i = 0; i < BV_STOPS.length - 1; i++) {
+      var b0 = BV_STOPS[i][0], c0 = BV_STOPS[i][1];
+      var b1 = BV_STOPS[i + 1][0], c1 = BV_STOPS[i + 1][1];
+      if (c >= b0 && c <= b1) {
+        var t = (c - b0) / (b1 - b0);
+        var r = Math.round(c0[0] + (c1[0] - c0[0]) * t);
+        var g = Math.round(c0[1] + (c1[1] - c0[1]) * t);
+        var bch = Math.round(c0[2] + (c1[2] - c0[2]) * t);
+        return "rgb(" + r + "," + g + "," + bch + ")";
+      }
+    }
+    return null;
+  }
+
+  // ------------------------------------------------------------------
+  // Formatage français
+  // ------------------------------------------------------------------
+  var MONTHS_FR = ["janvier", "février", "mars", "avril", "mai", "juin",
+    "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+  function formatInfoLine(placeLabel, Y, Mo, D, H, Mi, lat, lon) {
+    var dateStr = D + " " + MONTHS_FR[Mo - 1] + " " + Y + ", " + pad2(H) + "h" + pad2(Mi);
+    var latDir = lat >= 0 ? "N" : "S";
+    var lonDir = lon >= 0 ? "E" : "O";
+    var coordStr = Math.abs(lat).toFixed(2) + "° " + latDir + ", " + Math.abs(lon).toFixed(2) + "° " + lonDir;
+    var parts = [];
+    if (placeLabel) parts.push(placeLabel);
+    parts.push(dateStr);
+    parts.push(coordStr);
+    return parts.join(" · ").toUpperCase();
+  }
+
+  // ------------------------------------------------------------------
+  // Rendu SVG
+  // ------------------------------------------------------------------
+  var starsGroup = document.getElementById("starsGroup");
+  var constellationsGroup = document.getElementById("constellationsGroup");
+  var gridGroup = document.getElementById("gridGroup");
+  var cardinalGroup = document.getElementById("cardinalGroup");
+
+  function renderStars(lstD, lat, theme, realColors) {
+    var parts = [];
+    var feats = STARS.features;
+    for (var i = 0; i < feats.length; i++) {
+      var f = feats[i];
+      var coords = f.geometry.coordinates;
+      var ra = coords[0];
+      if (ra < 0) ra += 360;
+      var dec = coords[1];
+      var mag = f.properties.mag;
+      var h = horizontal(ra, dec, lstD, lat);
+      if (h.alt <= 0) continue;
+      var p = project(h.az, h.alt);
+      var rStar = Math.max(0.6, 6.2 - mag * 0.85);
+      var color = theme.starBase;
+      if (realColors) {
+        var c = bvToColor(f.properties.bv);
+        if (c) color = c;
+      }
+      var xs = p.x.toFixed(2), ys = p.y.toFixed(2), rs = rStar.toFixed(2);
+      parts.push('<circle cx="' + xs + '" cy="' + ys + '" r="' + rs + '" fill="' + color + '"/>');
+      if (mag < 1.2) {
+        var len = (rStar * 4.4).toFixed(2);
+        parts.push('<g stroke="' + color + '" stroke-width="0.55" opacity="0.5">' +
+          '<line x1="' + (p.x - len).toFixed(2) + '" y1="' + ys + '" x2="' + (p.x + len * 1).toFixed(2) + '" y2="' + ys + '"/>' +
+          '<line x1="' + xs + '" y1="' + (p.y - len).toFixed(2) + '" x2="' + xs + '" y2="' + (p.y + len * 1).toFixed(2) + '"/>' +
+          '</g>');
+      }
+    }
+    starsGroup.innerHTML = parts.join("");
+  }
+
+  function renderConstellations(lstD, lat, theme) {
+    var parts = [];
+    var feats = CONSTELLATIONS.features;
+    for (var i = 0; i < feats.length; i++) {
+      var lines = feats[i].geometry.coordinates;
+      for (var j = 0; j < lines.length; j++) {
+        var line = lines[j];
+        var prev = null;
+        for (var k = 0; k < line.length; k++) {
+          var ra = line[k][0];
+          if (ra < 0) ra += 360;
+          var dec = line[k][1];
+          var h = horizontal(ra, dec, lstD, lat);
+          var pt = h.alt > 0 ? project(h.az, h.alt) : null;
+          if (prev && pt) {
+            parts.push('<line x1="' + prev.x.toFixed(2) + '" y1="' + prev.y.toFixed(2) + '" x2="' + pt.x.toFixed(2) + '" y2="' + pt.y.toFixed(2) + '" stroke="' + theme.accent + '" stroke-width="1" opacity="0.26"/>');
+          }
+          prev = pt;
+        }
+      }
+    }
+    constellationsGroup.innerHTML = parts.join("");
+  }
+
+  function renderGrid(theme) {
+    var parts = [];
+    var altLevels = [30, 60];
+    for (var i = 0; i < altLevels.length; i++) {
+      var r = R_MAP * (90 - altLevels[i]) / 90;
+      parts.push('<circle cx="' + CX + '" cy="' + CY + '" r="' + r.toFixed(2) + '" fill="none" stroke="' + theme.accent + '" stroke-width="1" opacity="0.14"/>');
+    }
+    for (var az = 0; az < 360; az += 45) {
+      var p = project(az, 0);
+      parts.push('<line x1="' + CX + '" y1="' + CY + '" x2="' + p.x.toFixed(2) + '" y2="' + p.y.toFixed(2) + '" stroke="' + theme.accent + '" stroke-width="1" opacity="0.14"/>');
+    }
+    gridGroup.innerHTML = parts.join("");
+  }
+
+  function renderCardinals(theme) {
+    var items = [["N", 0], ["E", 90], ["S", 180], ["O", 270]];
+    var rr = R_MAP + 36;
+    var parts = [];
+    for (var i = 0; i < items.length; i++) {
+      var label = items[i][0], az = items[i][1];
+      var azRad = toRad(az);
+      var x = CX - rr * Math.sin(azRad);
+      var y = CY - rr * Math.cos(azRad);
+      parts.push('<text x="' + x.toFixed(2) + '" y="' + (y + 9).toFixed(2) + '" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" letter-spacing="2" fill="' + theme.textSecondary + '" opacity="0.85">' + label + '</text>');
+    }
+    cardinalGroup.innerHTML = parts.join("");
+  }
+
+  function applyTheme(theme) {
+    document.getElementById("posterBg").setAttribute("fill", theme.bg);
+    document.getElementById("skyGradientInner").setAttribute("stop-color", theme.gradient[0]);
+    document.getElementById("skyGradientOuter").setAttribute("stop-color", theme.gradient[1]);
+    var ringOuter = document.getElementById("skyRingOuter");
+    ringOuter.setAttribute("stroke", theme.ring);
+    ringOuter.setAttribute("opacity", theme.ringOpacity);
+    document.getElementById("skyRingInner").setAttribute("stroke", theme.ring);
+    document.getElementById("posterTitle").setAttribute("fill", theme.textPrimary);
+    document.getElementById("posterSubtitle").setAttribute("fill", theme.textSecondary);
+    document.getElementById("posterDivider").setAttribute("stroke", theme.accent);
+    document.getElementById("posterInfo").setAttribute("fill", theme.textSecondary);
+    document.getElementById("posterFooter").setAttribute("fill", theme.textSecondary);
+  }
+
+  function titleFontSize(text) {
+    var n = text.length;
+    if (n <= 18) return 58;
+    if (n <= 26) return 48;
+    if (n <= 34) return 40;
+    return 34;
+  }
+  function subtitleFontSize(text) {
+    var n = text.length;
+    if (n <= 30) return 30;
+    if (n <= 45) return 26;
+    return 22;
+  }
+  function infoFontSize(text) {
+    var n = text.length;
+    if (n <= 55) return 22;
+    if (n <= 75) return 18;
+    return 15;
+  }
+
+  // ------------------------------------------------------------------
+  // Lecture des contrôles et rendu global
+  // ------------------------------------------------------------------
+  var elDateTime = document.getElementById("inputDateTime");
+  var elOffset = document.getElementById("inputOffset");
+  var elPlace = document.getElementById("inputPlace");
+  var elLat = document.getElementById("inputLat");
+  var elLon = document.getElementById("inputLon");
+  var elPlaceLabel = document.getElementById("inputPlaceLabel");
+  var elTitle = document.getElementById("inputTitle");
+  var elSubtitle = document.getElementById("inputSubtitle");
+  var elTheme = document.getElementById("inputTheme");
+  var elToggleConstellations = document.getElementById("toggleConstellations");
+  var elToggleGrid = document.getElementById("toggleGrid");
+  var elToggleCardinals = document.getElementById("toggleCardinals");
+  var elToggleColors = document.getElementById("toggleColors");
+
+  function buildOffsetOptions() {
+    for (var h = -12; h <= 14; h++) {
+      var opt = document.createElement("option");
+      opt.value = String(h);
+      var label;
+      if (h === 1) label = "UTC+1 (France, hiver)";
+      else if (h === 2) label = "UTC+2 (France, été)";
+      else label = (h < 0 ? "UTC−" + Math.abs(h) : "UTC+" + h);
+      opt.textContent = label;
+      if (h === 1) opt.selected = true;
+      elOffset.appendChild(opt);
+    }
+  }
+
+  function buildPlaceOptions() {
+    for (var i = 0; i < PLACES.length; i++) {
+      var opt = document.createElement("option");
+      opt.value = String(i);
+      opt.textContent = PLACES[i].name;
+      elPlace.appendChild(opt);
+    }
+    elPlace.value = "0";
+  }
+
+  elPlace && elPlace.addEventListener("change", function () {
+    var p = PLACES[parseInt(elPlace.value, 10)];
+    if (!p) return;
+    elLat.value = p.lat;
+    elLon.value = p.lon;
+    elPlaceLabel.value = p.name;
+    render();
+  });
+
+  function render() {
+    var dtVal = elDateTime.value;
+    var lat = parseFloat(elLat.value);
+    var lon = parseFloat(elLon.value);
+    if (!dtVal || isNaN(lat) || isNaN(lon)) return;
+
+    var offset = parseFloat(elOffset.value);
+    var datePart = dtVal.split("T")[0];
+    var timePart = dtVal.split("T")[1] || "00:00";
+    var Y = parseInt(datePart.split("-")[0], 10);
+    var Mo = parseInt(datePart.split("-")[1], 10);
+    var D = parseInt(datePart.split("-")[2], 10);
+    var H = parseInt(timePart.split(":")[0], 10);
+    var Mi = parseInt(timePart.split(":")[1], 10);
+
+    var utcMillis = Date.UTC(Y, Mo - 1, D, H, Mi) - offset * 3600000;
+    var jd = julianDate(utcMillis);
+    var g = gmstDeg(jd);
+    var l = lstDeg(g, lon);
+
+    var theme = THEMES[elTheme.value] || THEMES["nuit-profonde"];
+    applyTheme(theme);
+
+    renderStars(l, lat, theme, elToggleColors.checked);
+    if (elToggleConstellations.checked) renderConstellations(l, lat, theme);
+    else constellationsGroup.innerHTML = "";
+    if (elToggleGrid.checked) renderGrid(theme);
+    else gridGroup.innerHTML = "";
+    if (elToggleCardinals.checked) renderCardinals(theme);
+    else cardinalGroup.innerHTML = "";
+
+    var title = (elTitle.value || "Le ciel étoilé").toUpperCase();
+    var subtitle = elSubtitle.value || "";
+    var titleEl = document.getElementById("posterTitle");
+    var subtitleEl = document.getElementById("posterSubtitle");
+    titleEl.textContent = title;
+    titleEl.setAttribute("font-size", titleFontSize(title));
+    subtitleEl.textContent = subtitle;
+    subtitleEl.setAttribute("font-size", subtitleFontSize(subtitle));
+
+    var infoStr = formatInfoLine(elPlaceLabel.value, Y, Mo, D, H, Mi, lat, lon);
+    var infoEl = document.getElementById("posterInfo");
+    infoEl.textContent = infoStr;
+    infoEl.setAttribute("font-size", infoFontSize(infoStr));
+  }
+
+  var renderScheduled = false;
+  function scheduleRender() {
+    if (renderScheduled) return;
+    renderScheduled = true;
+    window.requestAnimationFrame(function () {
+      renderScheduled = false;
+      render();
+    });
+  }
+
+  var controlsRoot = document.getElementById("controls");
+  var watched = controlsRoot.querySelectorAll("input, select");
+  for (var wi = 0; wi < watched.length; wi++) {
+    watched[wi].addEventListener("input", scheduleRender);
+    watched[wi].addEventListener("change", scheduleRender);
+  }
+
+  // ------------------------------------------------------------------
+  // Export
+  // ------------------------------------------------------------------
+  function filenameFor(ext) {
+    var d = (elDateTime.value || "carte").split("T")[0];
+    return "carte-du-ciel-" + d + "." + ext;
+  }
+
+  function serializedSvg(widthAttr, heightAttr) {
+    var svgEl = document.getElementById("poster");
+    var clone = svgEl.cloneNode(true);
+    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    if (widthAttr) clone.setAttribute("width", widthAttr);
+    if (heightAttr) clone.setAttribute("height", heightAttr);
+    return new XMLSerializer().serializeToString(clone);
+  }
+
+  function triggerDownload(url, filename) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  document.getElementById("btnDownloadSVG").addEventListener("click", function () {
+    var svgStr = '<?xml version="1.0" encoding="UTF-8"?>\n' + serializedSvg(1500, 2000);
+    var blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    triggerDownload(url, filenameFor("svg"));
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById("btnDownloadPNG").addEventListener("click", function () {
+    var svgStr = serializedSvg(1500, 2000);
+    var blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var img = new Image();
+    img.onload = function () {
+      var canvas = document.createElement("canvas");
+      canvas.width = 3000;
+      canvas.height = 4000;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, 3000, 4000);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(function (pngBlob) {
+        var pngUrl = URL.createObjectURL(pngBlob);
+        triggerDownload(pngUrl, filenameFor("png"));
+        setTimeout(function () { URL.revokeObjectURL(pngUrl); }, 1000);
+      }, "image/png");
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      window.alert("Erreur lors de la génération du PNG. Réessayez, ou utilisez l'export SVG.");
+    };
+    img.src = url;
+  });
+
+  // ------------------------------------------------------------------
+  // Initialisation
+  // ------------------------------------------------------------------
+  buildOffsetOptions();
+  buildPlaceOptions();
+  elLat.value = PLACES[0].lat;
+  elLon.value = PLACES[0].lon;
+  elPlaceLabel.value = PLACES[0].name;
+  render();
+})();
+</script>
+</body>
+</html>
