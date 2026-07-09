@@ -1,21 +1,26 @@
 # Objectif 40 000 € en 6 mois — trois pistes, un dépôt
 
-Ce dépôt contient **trois activités complémentaires**, chacune avec son outil
+Ce dépôt contient **quatre activités complémentaires**, chacune avec son outil
 et son plan d'affaires. Elles partagent la même clientèle et se renforcent
 mutuellement (un client site devient client contenu, les articles SEO font
-vivre la boutique de cartes du ciel, etc.).
+vivre la boutique de cartes du ciel, le guide du territoire apporte des
+prospects à toutes les autres, etc.).
 
 | Piste | Quoi | Outils | Plan |
 |---|---|---|---|
 | 1. Sites locaux | Vendre des sites aux artisans, restaurants et gîtes du bocage | [`agency/`](./agency/index.html) (vitrine), [`factory/`](./factory/build.js) (fabrique), [`demos/`](./demos/index.html) | [`PLAN.md`](./PLAN.md) |
 | 2. Rédaction web | Passer des articles « au mot » aux abonnements de contenu SEO | [`redaction/index.html`](./redaction/index.html) (offre), [`redaction/studio.html`](./redaction/studio.html) (Studio SEO privé) | [`PLAN-REDACTION.md`](./PLAN-REDACTION.md) |
 | 3. Cartes du ciel | Produit cadeau : l'affiche du vrai ciel d'une nuit précise | [`etoiles/index.html`](./etoiles/index.html) (générateur, `node etoiles/build.js` pour régénérer) | [`PLAN-ETOILES.md`](./PLAN-ETOILES.md) |
+| 4. Guide du territoire | Le guide de référence de la Suisse Normande, annuaire payant pour les pros du tourisme | [`territoire/index.html`](./territoire/index.html) (guide), [`territoire/pros.html`](./territoire/pros.html) (offre pros), `node territoire/build.js` pour régénérer | [`PLAN-TERRITOIRE.md`](./PLAN-TERRITOIRE.md) |
 
 La piste 2 s'appuie sur l'activité existante de micro-entrepreneur en
 rédaction web (rien à créer administrativement). La piste 3 est la plus
 risquée mais vise la saison des cadeaux (octobre–décembre) ; sa production
-par commande est quasi nulle. Tous les outils sont autonomes : aucun
-`npm install`, aucune requête externe, tout fonctionne hors ligne.
+par commande est quasi nulle. La piste 4 est l'actif défensif : elle rapporte
+moins vite, mais repose sur un avantage que personne ne peut copier (habiter
+le territoire + écrire + produire les outils) et alimente toutes les autres.
+Tous les outils sont autonomes : aucun `npm install`, aucune requête externe,
+tout fonctionne hors ligne.
 
 ---
 
@@ -235,11 +240,15 @@ ligne, personnaliser :
 ├── redaction/
 │   ├── index.html              # Page d'offre rédaction SEO (abonnements)
 │   └── studio.html             # Studio SEO : brief, analyse, métadonnées (100 % local)
-└── etoiles/
-    ├── index.html              # Générateur de cartes du ciel (généré, autonome)
-    ├── app.template.html       # Source de l'application (à éditer, puis rebuild)
-    ├── build.js                # Injecte les données -> index.html
-    ├── test-astro.js           # Vérifications astronomiques
-    ├── README.md               # Doc dédiée (rebuild, données, impression)
-    └── data/                   # Catalogue d'étoiles + constellations (CC BY-SA)
+├── etoiles/
+│   ├── index.html              # Générateur de cartes du ciel (généré, autonome)
+│   ├── app.template.html       # Source de l'application (à éditer, puis rebuild)
+│   ├── build.js                # Injecte les données -> index.html
+│   ├── test-astro.js           # Vérifications astronomiques
+│   ├── README.md               # Doc dédiée (rebuild, données, impression)
+│   └── data/                   # Catalogue d'étoiles + constellations (CC BY-SA)
+└── territoire/
+    ├── build.js                # Générateur du guide (zéro dépendance)
+    ├── data/                   # Lieux, activités, annuaire pros (JSON)
+    └── *.html                  # Pages générées (index, découvrir, bouger, dormir-manger, pros)
 ```

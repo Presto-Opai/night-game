@@ -24,11 +24,12 @@ jobs:
       - name: Récupération du dépôt
         uses: actions/checkout@v4
 
-      - name: Régénération des sites (fabrique + carte du ciel)
+      - name: Régénération des sites (fabrique + carte du ciel + guide)
         run: |
           node factory/build.js
           node etoiles/build.js
           node etoiles/test-astro.js
+          node territoire/build.js
 
       - name: Configuration de GitHub Pages
         uses: actions/configure-pages@v5
