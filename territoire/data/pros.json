@@ -1,0 +1,90 @@
+[
+  {
+    "id": "gite-val-orne",
+    "name": "Gîte du Val d'Orne",
+    "type": "gite",
+    "commune": "Pont-d'Ouilly",
+    "description": "Ancienne ferme normande rénovée avec goût, à deux pas des bords de l'Orne et des bases de canoë. Grand jardin clos, terrasse exposée sud et intérieur chaleureux pour des séjours en famille ou entre amis.",
+    "capacite": "6 personnes, 3 chambres",
+    "tier": "page-dediee",
+    "exemple": true,
+    "telephone": "02 33 00 00 05"
+  },
+  {
+    "id": "auberge-pain-de-sucre",
+    "name": "Auberge du Pain de Sucre",
+    "type": "restaurant",
+    "commune": "Clécy",
+    "description": "Table familiale qui met à l'honneur les produits du terroir normand : cidre, andouille, camembert et volailles fermières, dans une salle avec vue sur la vallée de l'Orne.",
+    "specialite": "cuisine normande traditionnelle",
+    "tier": "page-dediee",
+    "exemple": true,
+    "telephone": "02 33 00 00 06"
+  },
+  {
+    "id": "chambres-roche-fleurie",
+    "name": "Chambres d'hôtes La Roche Fleurie",
+    "type": "chambres",
+    "commune": "Saint-Philbert-sur-Orne",
+    "description": "Trois chambres d'hôtes aménagées dans une maison en pierre à quelques minutes à pied de la Roche d'Oëtre, avec petit-déjeuner maison servi dans le jardin aux beaux jours.",
+    "capacite": "3 chambres",
+    "tier": "mise-en-avant",
+    "exemple": true,
+    "telephone": "02 33 00 00 07"
+  },
+  {
+    "id": "camping-gorges",
+    "name": "Camping des Gorges",
+    "type": "camping",
+    "commune": "Athis-Val-de-Rouvre",
+    "description": "Camping familial à taille humaine en bordure de la Rouvre, emplacements ombragés et accès direct aux sentiers des gorges pour les campeurs en tente comme en camping-car.",
+    "capacite": "40 emplacements",
+    "tier": "mise-en-avant",
+    "exemple": true,
+    "telephone": "02 33 00 00 08"
+  },
+  {
+    "id": "gite-rochers",
+    "name": "Gîte des Rochers",
+    "type": "gite",
+    "commune": "Clécy",
+    "description": "Petit gîte indépendant au calme, à proximité du site d'escalade des rochers des Parcs, idéal pour un séjour tourné vers les activités de plein air.",
+    "capacite": "4 personnes",
+    "tier": "basique",
+    "exemple": true,
+    "telephone": "02 33 00 00 01"
+  },
+  {
+    "id": "bistrot-rouvre",
+    "name": "Le Bistrot de la Rouvre",
+    "type": "restaurant",
+    "commune": "Ségrie-Fontaine",
+    "description": "Petit restaurant de village au cadre simple, cuisine du terroir et plat du jour selon le marché.",
+    "specialite": "cuisine du terroir",
+    "tier": "basique",
+    "exemple": true,
+    "telephone": "02 33 00 00 02"
+  },
+  {
+    "id": "chambres-du-hom",
+    "name": "Chambres d'hôtes du Hom",
+    "type": "chambres",
+    "commune": "Thury-Harcourt-le-Hom",
+    "description": "Deux chambres d'hôtes dans une maison de caractère proche du parc du château et de la boucle de l'Orne.",
+    "capacite": "2 chambres",
+    "tier": "basique",
+    "exemple": true,
+    "telephone": "02 33 00 00 03"
+  },
+  {
+    "id": "camping-du-lac",
+    "name": "Camping du Lac",
+    "type": "camping",
+    "commune": "Putanges-le-Lac",
+    "description": "Camping en bordure du lac de Rabodanges, emplacements nus et locatifs, accès direct aux activités nautiques du lac.",
+    "capacite": "60 emplacements",
+    "tier": "basique",
+    "exemple": true,
+    "telephone": "02 33 00 00 04"
+  }
+]

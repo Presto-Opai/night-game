@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L'Atelier Plume — Mise en page de poème</title>
+<meta name="description" content="Outil interne : transforme un poème sur mesure en affiche d'art prête à imprimer.">
+<style>
+  :root { --ink:#2b2620; --paper:#f7f2e8; --accent:#8a5a2b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; background:#e8e0d0; color:var(--ink); }
+  header.app { background:var(--ink); color:#f0e9dc; padding:14px 24px; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+  header.app h1 { font-size:1.15rem; font-weight:normal; letter-spacing:.06em; }
+  header.app .tag { font-size:.75rem; opacity:.75; border:1px solid #f0e9dc55; padding:2px 10px; border-radius:99px; }
+  .layout { display:grid; grid-template-columns: 360px 1fr; gap:0; min-height:calc(100vh - 52px); }
+  @media (max-width: 900px) { .layout { grid-template-columns:1fr; } }
+  .controls { background:#f2ecdf; padding:20px; border-right:1px solid #d8cdb8; }
+  .controls h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.12em; color:var(--accent); margin:18px 0 8px; }
+  .controls h2:first-child { margin-top:0; }
+  label { display:block; font-size:.8rem; margin:10px 0 4px; color:#5a5045; }
+  input[type=text], textarea, select { width:100%; padding:8px 10px; border:1px solid #c9bda5; border-radius:4px; background:#fffdf8; font:inherit; font-size:.9rem; color:var(--ink); }
+  textarea { resize:vertical; }
+  .btns { margin-top:20px; display:flex; flex-direction:column; gap:8px; }
+  button { padding:10px 14px; font:inherit; font-size:.9rem; border-radius:4px; border:1px solid var(--ink); cursor:pointer; }
+  .primary { background:var(--ink); color:#f0e9dc; }
+  .secondary { background:transparent; color:var(--ink); }
+  .hint { font-size:.75rem; color:#7a6f60; margin-top:10px; line-height:1.4; }
+  .preview-wrap { display:flex; align-items:flex-start; justify-content:center; padding:28px; background:#dcd2be; }
+  #preview { width:min(620px, 92%); box-shadow:0 12px 40px rgba(43,38,32,.35); }
+  #preview svg { display:block; width:100%; height:auto; }
+</style>
+</head>
+<body>
+<header class="app">
+  <h1>L'Atelier Plume · Affiche de poème</h1>
+  <span class="tag">Outil interne — rien n'est envoyé sur internet</span>
+</header>
+<div class="layout">
+  <aside class="controls">
+    <h2>Texte</h2>
+    <label for="titre">Titre de l'affiche</label>
+    <input type="text" id="titre" value="Camille">
+    <label for="poeme">Poème (une ligne par vers, ligne vide entre strophes)</label>
+    <textarea id="poeme" rows="12">Comme un matin de mai posé sur le bocage,
+Au premier cri le monde a changé de couleur ;
+Même les vieux pommiers ont tourné une page,
+Inventant pour toi seule une neuve douceur.
+La rivière un instant retint son long passage,
+Le ciel garda longtemps une étoile en éveil —
+Et depuis, chaque aurore a des airs de merveille.</textarea>
+    <label for="dedicace">Dédicace (bas de l'affiche)</label>
+    <input type="text" id="dedicace" value="Pour Camille, née le 14 février 2024 — avec tout l'amour de sa famille">
+    <h2>Style</h2>
+    <label for="style">Ambiance</label>
+    <select id="style">
+      <option value="classique" selected>Classique (ivoire &amp; encre)</option>
+      <option value="botanique">Botanique (vert tendre)</option>
+      <option value="nuit">Nuit (marine &amp; or)</option>
+    </select>
+    <label style="margin-top:12px"><input type="checkbox" id="acrostiche" checked> Mettre en valeur l'acrostiche (première lettre de chaque vers)</label>
+    <div class="btns">
+      <button class="primary" id="dl-png">Télécharger PNG haute résolution</button>
+      <button class="secondary" id="dl-svg">Télécharger SVG (vectoriel)</button>
+    </div>
+    <p class="hint">Flux de travail : brief client (questionnaire) → écriture avec Claude → polissage → collage ici → export. Format 3:4, imprimable jusqu'en A2 à 300 dpi via le SVG. Le poème d'exemple est un acrostiche de « CAMILLE » en alexandrins.</p>
+  </aside>
+  <main class="preview-wrap"><div id="preview"></div></main>
+</div>
+<script>
+'use strict';
+const W = 1500, H = 2000;
+const THEMES = {
+  classique: { bg:'#f7f2e8', ink:'#2b2620', accent:'#8a5a2b', ring:'#c9bda5', orn:'❦' },
+  botanique: { bg:'#f2f5ec', ink:'#2e3a2b', accent:'#5a7a4a', ring:'#b9c9a8', orn:'✾' },
+  nuit:      { bg:'#101528', ink:'#ece4d2', accent:'#c9a55a', ring:'#3a4260', orn:'✶' }
+};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const $ = id => document.getElementById(id);
+
+function render() {
+  const t = THEMES[$('style').value];
+  const titre = $('titre').value.trim();
+  const dedicace = $('dedicace').value.trim();
+  const acro = $('acrostiche').checked;
+  const lines = $('poeme').value.replace(/\r/g,'').split('\n');
+  const n = lines.filter(l => l.trim()).length || 1;
+  // Taille des vers adaptée au nombre de lignes
+  const fs = Math.max(30, Math.min(46, Math.round(900 / (n + 2))));
+  const lh = Math.round(fs * 1.75);
+  const blockH = lines.length * lh;
+  let y = Math.round((H - blockH) / 2) + 60;
+  let verses = '';
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { y += Math.round(lh * 0.6); continue; }
+    if (acro && /^[A-ZÀ-ÖØ-Þ]/.test(line)) {
+      verses += `<text x="${W/2}" y="${y}" text-anchor="middle" font-size="${fs}" fill="${t.ink}" font-family="Georgia, serif"><tspan fill="${t.accent}" font-size="${Math.round(fs*1.25)}">${esc(line[0])}</tspan>${esc(line.slice(1))}</text>`;
+    } else {
+      verses += `<text x="${W/2}" y="${y}" text-anchor="middle" font-size="${fs}" fill="${t.ink}" font-family="Georgia, serif">${esc(line)}</text>`;
+    }
+    y += lh;
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="${t.bg}"/>
+  <rect x="60" y="60" width="${W-120}" height="${H-120}" fill="none" stroke="${t.ring}" stroke-width="3"/>
+  <rect x="78" y="78" width="${W-156}" height="${H-156}" fill="none" stroke="${t.ring}" stroke-width="1"/>
+  <text x="${W/2}" y="230" text-anchor="middle" font-size="86" letter-spacing="14" fill="${t.ink}" font-family="Georgia, serif">${esc(titre.toUpperCase())}</text>
+  <text x="${W/2}" y="310" text-anchor="middle" font-size="40" fill="${t.accent}" font-family="Georgia, serif">${t.orn}</text>
+  ${verses}
+  <text x="${W/2}" y="${H-190}" text-anchor="middle" font-size="40" fill="${t.accent}" font-family="Georgia, serif">${t.orn}</text>
+  <text x="${W/2}" y="${H-130}" text-anchor="middle" font-size="28" font-style="italic" fill="${t.ink}" opacity=".85" font-family="Georgia, serif">${esc(dedicace)}</text>
+</svg>`;
+  document.getElementById('preview').innerHTML = svg;
+  return svg;
+}
+
+function download(name, blob) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+const fileBase = () => 'poeme-' + ($('titre').value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'affiche');
+
+$('dl-svg').addEventListener('click', () => {
+  download(fileBase() + '.svg', new Blob([render()], { type:'image/svg+xml' }));
+});
+$('dl-png').addEventListener('click', () => {
+  const svg = render();
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement('canvas');
+    c.width = 2400; c.height = 3200;
+    c.getContext('2d').drawImage(img, 0, 0, 2400, 3200);
+    c.toBlob(b => download(fileBase() + '.png', b), 'image/png');
+  };
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+});
+for (const id of ['titre','poeme','dedicace','style','acrostiche']) $(id).addEventListener('input', render);
+render();
+</script>
+</body>
+</html>

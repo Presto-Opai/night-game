@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L'Atelier Plume — Le Livret d'une Vie</title>
+<meta name="description" content="Outil interne : met en page une mini-biographie en livret A5 prêt à imprimer.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; background:#d8d2c4; color:#2b2620; }
+  header.app { background:#2b2620; color:#efe8d8; padding:14px 24px; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+  header.app h1 { font-size:1.15rem; font-weight:normal; letter-spacing:.06em; }
+  header.app .tag { font-size:.75rem; opacity:.75; border:1px solid #efe8d855; padding:2px 10px; border-radius:99px; }
+  .layout { display:grid; grid-template-columns:400px 1fr; min-height:calc(100vh - 52px); }
+  @media (max-width: 980px) { .layout { grid-template-columns:1fr; } }
+  .controls { background:#efe8d8; padding:20px; border-right:1px solid #c4b898; overflow-y:auto; max-height:calc(100vh - 52px); }
+  @media (max-width: 980px) { .controls { max-height:none; } }
+  .controls h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.12em; color:#8a5a2b; margin:18px 0 6px; }
+  .controls h2:first-child { margin-top:0; }
+  label { display:block; font-size:.78rem; margin:8px 0 3px; color:#5a5045; }
+  input[type=text], textarea { width:100%; padding:7px 9px; border:1px solid #c9bda5; border-radius:4px; background:#fffdf8; font:inherit; font-size:.88rem; }
+  textarea { resize:vertical; }
+  .chapitre-form { border:1px dashed #b9ac8d; border-radius:6px; padding:10px; margin-top:10px; background:#f6efdd; }
+  .chapitre-form .rm { float:right; border:none; background:none; color:#a8462f; cursor:pointer; font-size:.8rem; }
+  .btns { margin-top:18px; display:flex; flex-direction:column; gap:8px; }
+  button.action { padding:10px 14px; font:inherit; font-size:.9rem; border-radius:4px; border:1px solid #2b2620; cursor:pointer; background:transparent; }
+  button.primary { background:#2b2620; color:#efe8d8; }
+  .hint { font-size:.74rem; color:#7a6f60; margin-top:10px; line-height:1.45; }
+
+  .stage { padding:26px; display:flex; flex-direction:column; align-items:center; gap:22px; background:#c9c2b2; }
+  .page { width:min(500px, 96%); aspect-ratio:148/210; background:#fbf7ec; box-shadow:0 10px 30px rgba(43,38,32,.35); padding:9% 10%; overflow:hidden; position:relative; }
+  .page.couverture { display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .couverture .filet { width:40%; margin:18px auto; border-top:1px solid #8a5a2b; }
+  .couverture h1 { font-size:1.9rem; letter-spacing:.06em; text-transform:uppercase; font-weight:normal; }
+  .couverture .sous { font-style:italic; margin-top:10px; color:#5a5045; }
+  .couverture .orn { color:#8a5a2b; font-size:1.4rem; margin-top:22px; }
+  .page h2 { font-size:1.15rem; text-transform:uppercase; letter-spacing:.08em; font-weight:normal; text-align:center; margin-bottom:4px; }
+  .page .num { text-align:center; color:#8a5a2b; font-size:.75rem; letter-spacing:.2em; margin-bottom:14px; }
+  .page .texte { font-size:.86rem; line-height:1.65; text-align:justify; }
+  .page .texte p { margin-bottom:.7em; }
+  .page .texte p:first-child::first-letter { font-size:2.4em; float:left; line-height:.85; padding-right:5px; color:#8a5a2b; }
+  .page .folio { position:absolute; bottom:4%; left:0; right:0; text-align:center; font-size:.7rem; color:#8a5a2b; }
+  .page.dedicace-p { display:flex; align-items:center; justify-content:center; text-align:center; font-style:italic; line-height:1.8; }
+
+  @media print {
+    header.app, .controls, .hint { display:none !important; }
+    .layout { display:block; }
+    body, .stage { background:#fff; padding:0; gap:0; }
+    .page { width:100%; aspect-ratio:auto; min-height:100%; box-shadow:none; page-break-after:always; padding:22mm 18mm; }
+    @page { size:A5 portrait; margin:0; }
+  }
+</style>
+</head>
+<body>
+<header class="app">
+  <h1>L'Atelier Plume · Le Livret d'une Vie</h1>
+  <span class="tag">Outil interne — rien n'est envoyé sur internet</span>
+</header>
+<div class="layout">
+<aside class="controls">
+  <h2>Couverture</h2>
+  <label>Titre</label><input type="text" id="i-titre" value="Une vie de Madeleine">
+  <label>Sous-titre</label><input type="text" id="i-sous" value="1946 — aujourd'hui · racontée par ceux qui l'aiment">
+  <h2>Dédicace (page 2)</h2>
+  <textarea id="i-dedicace" rows="4">Pour tes quatre-vingts ans, nous avons rassemblé nos souvenirs.
+Ils tenaient dans nos cœurs ; les voici sur le papier.
+Tes enfants, petits-enfants et arrière-petits-enfants.</textarea>
+  <h2>Chapitres</h2>
+  <div id="chapitres"></div>
+  <div class="btns">
+    <button class="action" id="add">+ Ajouter un chapitre</button>
+    <button class="action primary" onclick="window.print()">Imprimer / Exporter en PDF (A5)</button>
+  </div>
+  <p class="hint">Chaque chapitre devient une ou plusieurs pages A5. Impression brochée : exporter le PDF puis le confier à un imprimeur en ligne (livret A5, couture ou agrafage à cheval). Le contenu d'exemple montre le ton : anecdotes rassemblées via le questionnaire, écrites avec Claude, polies par vos soins.</p>
+</aside>
+<main class="stage" id="stage"></main>
+</div>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const NBSP = ' ';
+const typo = s => s.replace(/\s+([;:!?»])/g, NBSP + '$1').replace(/«\s+/g, '«' + NBSP);
+const ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+
+let chapitres = [
+  { titre: "L'enfance aux sabots", texte: "Madeleine naît un matin de gel, dans une ferme où l'on compte plus de pommiers que d'horloges. L'école est à quatre kilomètres ; elle les fait à pied, hiver comme été, et prétendra plus tard que c'est là qu'elle a appris à ne jamais se plaindre — enquête familiale toujours en cours.\n\nDe ces années, elle garde le goût du pain frotté d'ail, l'art de siffler entre deux doigts, et une tendresse définitive pour les chats de grange." },
+  { titre: "Le bal du 14 Juillet", texte: "L'histoire est connue de tous, mais personne ne se lasse de l'entendre. Un bal, une guirlande d'ampoules, un jeune homme trop timide pour l'inviter — alors c'est elle qui traverse la piste. Soixante ans plus tard, elle jure encore qu'elle allait simplement « chercher une limonade ».\n\nLa limonade dure depuis 1966." },
+  { titre: "La table des dimanches", texte: "Sa cuisine a nourri quatre générations, deux fanfares et un nombre incalculable de voisins « qui passaient par là ». Son poulet du dimanche fait l'objet d'une guerre de succession ouverte entre ses petits-enfants ; la recette exacte demeure, à ce jour, classée secret défense.\n\nOn y a ri, pleuré, révisé des examens et annoncé des mariages. C'est la table qui nous a appris que tout se répare mieux quand on est assis autour." }
+];
+
+function renderForm() {
+  const wrap = $('chapitres');
+  wrap.textContent = '';
+  chapitres.forEach((ch, i) => {
+    const div = document.createElement('div');
+    div.className = 'chapitre-form';
+    const rm = document.createElement('button');
+    rm.className = 'rm'; rm.textContent = 'retirer';
+    rm.addEventListener('click', () => { chapitres.splice(i, 1); renderForm(); renderPages(); });
+    const lt = document.createElement('label'); lt.textContent = 'Titre du chapitre ' + (i + 1);
+    const it = document.createElement('input'); it.type = 'text'; it.value = ch.titre;
+    it.addEventListener('input', () => { ch.titre = it.value; renderPages(); });
+    const lx = document.createElement('label'); lx.textContent = 'Texte (paragraphes séparés par une ligne vide)';
+    const tx = document.createElement('textarea'); tx.rows = 6; tx.value = ch.texte;
+    tx.addEventListener('input', () => { ch.texte = tx.value; renderPages(); });
+    div.append(rm, lt, it, lx, tx);
+    wrap.appendChild(div);
+  });
+}
+
+function renderPages() {
+  const stage = $('stage');
+  stage.textContent = '';
+  const cover = document.createElement('div');
+  cover.className = 'page couverture';
+  cover.innerHTML = '<div class="orn">❦</div><h1></h1><div class="filet"></div><p class="sous"></p>';
+  cover.querySelector('h1').textContent = typo($('i-titre').value);
+  cover.querySelector('.sous').textContent = typo($('i-sous').value);
+  stage.appendChild(cover);
+
+  const ded = document.createElement('div');
+  ded.className = 'page dedicace-p';
+  const dd = document.createElement('div');
+  for (const line of $('i-dedicace').value.split('\n')) {
+    const p = document.createElement('p');
+    p.textContent = typo(line);
+    dd.appendChild(p);
+  }
+  ded.appendChild(dd);
+  stage.appendChild(ded);
+
+  chapitres.forEach((ch, i) => {
+    const pg = document.createElement('div');
+    pg.className = 'page';
+    const h = document.createElement('h2'); h.textContent = typo(ch.titre);
+    const num = document.createElement('div'); num.className = 'num'; num.textContent = 'Chapitre ' + (ROMAN[i] || i + 1);
+    const tx = document.createElement('div'); tx.className = 'texte';
+    for (const para of ch.texte.split(/\n\s*\n/)) {
+      if (!para.trim()) continue;
+      const p = document.createElement('p');
+      p.textContent = typo(para.trim().replace(/\n/g, ' '));
+      tx.appendChild(p);
+    }
+    const folio = document.createElement('div'); folio.className = 'folio'; folio.textContent = String(i + 3);
+    pg.append(h, num, tx, folio);
+    stage.appendChild(pg);
+  });
+}
+
+$('add').addEventListener('click', () => {
+  chapitres.push({ titre: 'Nouveau chapitre', texte: '' });
+  renderForm(); renderPages();
+});
+for (const id of ['i-titre','i-sous','i-dedicace']) $(id).addEventListener('input', renderPages);
+renderForm();
+renderPages();
+</script>
+</body>
+</html>

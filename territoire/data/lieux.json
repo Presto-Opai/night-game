@@ -1,0 +1,199 @@
+[
+  {
+    "id": "roche-doetre",
+    "name": "La Roche d'Oëtre",
+    "commune": "Saint-Philbert-sur-Orne / Athis-Val-de-Rouvre",
+    "category": "panorama",
+    "lat": 48.742,
+    "lon": -0.374,
+    "description": "Surplombant les gorges de la Rouvre de plus de cent mètres, la Roche d'Oëtre est le point de vue le plus spectaculaire de la Suisse Normande. Un éperon rocheux et une passerelle suspendue offrent un panorama vertigineux sur la rivière encaissée et la forêt qui l'entoure.",
+    "conseils": [
+      "Prévoir de bonnes chaussures : le sentier longe par endroits des à-pics.",
+      "Le point de vue est particulièrement photogénique tôt le matin, quand la brume stagne au fond des gorges."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "gorges-rouvre",
+    "name": "Les gorges de la Rouvre",
+    "commune": "Saint-Philbert-sur-Orne",
+    "category": "nature",
+    "lat": 48.748,
+    "lon": -0.383,
+    "description": "La Rouvre a creusé au fil des millénaires des gorges profondes et boisées avant de rejoindre l'Orne. Le sentier qui les longe alterne passages en sous-bois et échappées rocheuses, dans une ambiance nettement plus escarpée que le reste du bocage normand.",
+    "conseils": [
+      "Les sentiers peuvent être glissants après la pluie : des chaussures à crampons sont conseillées.",
+      "Prévoir plusieurs heures pour une boucle complète le long de la rivière."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "maison-riviere",
+    "name": "La Maison de la Rivière et du Paysage",
+    "commune": "Ségrie-Fontaine",
+    "category": "nature",
+    "lat": 48.757,
+    "lon": -0.396,
+    "description": "La Maison de la Rivière et du Paysage propose une découverte pédagogique de l'écosystème de l'Orne et de la Rouvre, entre aquariums, sentiers d'interprétation et bords de rivière aménagés. Un point de départ agréable pour comprendre la faune et la flore du territoire avant de partir en balade.",
+    "conseils": [
+      "Idéal pour une sortie en famille avant ou après une randonnée dans les gorges."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "clecy-village",
+    "name": "Clécy",
+    "commune": "Clécy",
+    "category": "village",
+    "lat": 48.900,
+    "lon": -0.478,
+    "description": "Souvent présentée comme la « capitale » de la Suisse Normande, Clécy s'étage sur les rives de l'Orne au pied d'un relief escarpé. Le bourg mêle maisons en pierre du pays, guinguette au bord de l'eau et vue sur les rochers qui dominent la vallée.",
+    "conseils": [
+      "Le bord de l'Orne, autour de l'ancienne guinguette, est un bon point de départ pour flâner à pied."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "pain-de-sucre",
+    "name": "Le Pain de Sucre",
+    "commune": "Clécy",
+    "category": "panorama",
+    "lat": 48.906,
+    "lon": -0.474,
+    "description": "Ce piton rocheux domine la vallée de l'Orne et offre l'une des vues les plus connues de la Suisse Normande, souvent comparée à des paysages de moyenne montagne. Le site est également un lieu d'envol pour le vol libre, quand les conditions le permettent.",
+    "conseils": [
+      "Le point de vue se mérite : comptez une bonne montée depuis le fond de la vallée."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "viaduc-clecy",
+    "name": "Le viaduc de Clécy",
+    "commune": "Clécy",
+    "category": "panorama",
+    "lat": 48.902,
+    "lon": -0.477,
+    "description": "Cet ancien viaduc ferroviaire enjambe l'Orne en granit et en fer, offrant un point de vue en hauteur sur la rivière et les rochers alentour. Il est aujourd'hui un repère visuel du paysage de Clécy, visible depuis de nombreux points de la vallée.",
+    "conseils": [
+      "Il se découvre aussi bien depuis les rives de l'Orne, en contrebas, que depuis le tablier lui-même."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "pont-douilly",
+    "name": "Pont-d'Ouilly",
+    "commune": "Pont-d'Ouilly",
+    "category": "village",
+    "lat": 48.855,
+    "lon": -0.406,
+    "description": "Bourg situé au confluent de l'Orne et du Traon, Pont-d'Ouilly est un point de passage traditionnel entre les gorges et le bocage, et une base pratique pour les activités nautiques. Le village conserve un caractère rural et paisible, à taille humaine.",
+    "conseils": [
+      "Un bon point de départ ou d'arrivée pour une descente en canoë sur l'Orne."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "lac-rabodanges",
+    "name": "Le lac et barrage de Rabodanges",
+    "commune": "Putanges-le-Lac",
+    "category": "nature",
+    "lat": 48.802,
+    "lon": -0.352,
+    "description": "Formé par un barrage hydroélectrique sur l'Orne, le lac de Rabodanges s'étire sur plusieurs kilomètres entre des rives boisées et escarpées. C'est l'un des plans d'eau les plus prisés du territoire pour les activités nautiques et la promenade au calme.",
+    "conseils": [
+      "Les routes qui surplombent le lac offrent plusieurs points de vue accessibles à pied."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "thury-harcourt-hom",
+    "name": "Thury-Harcourt-le-Hom et la boucle de l'Orne",
+    "commune": "Thury-Harcourt-le-Hom",
+    "category": "nature",
+    "lat": 49.040,
+    "lon": -0.472,
+    "description": "Porte nord de la Suisse Normande, Thury-Harcourt-le-Hom occupe un site marqué par une large boucle de l'Orne et par le parc du château, reconstruit après-guerre. La rivière y dessine un méandre particulièrement photogénique, entouré de coteaux boisés.",
+    "conseils": [
+      "Le sentier qui suit la boucle de l'Orne permet une balade tranquille avec plusieurs points de vue sur le méandre."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "mont-cerisy",
+    "name": "Le Mont de Cerisy",
+    "commune": "Cerisy-Belle-Étoile",
+    "category": "nature",
+    "lat": 48.830,
+    "lon": -0.490,
+    "description": "Ce massif boisé est réputé pour ses rhododendrons, plantés au XIXe siècle et spectaculaires à la floraison. Les sentiers qui le traversent offrent aussi, par endroits, des vues dégagées sur le bocage environnant.",
+    "conseils": [
+      "La période de floraison des rhododendrons, en fin de printemps, est le moment le plus spectaculaire pour la visite."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "voie-verte-flers-domfront",
+    "name": "La Voie Verte Flers–Domfront",
+    "commune": "de Flers à Domfront",
+    "category": "nature",
+    "lat": 48.760,
+    "lon": -0.570,
+    "description": "Aménagée sur le tracé d'une ancienne voie ferrée, cette voie verte relie Flers à Domfront sur un itinéraire plat et sécurisé, séparé de la circulation automobile. Elle traverse bocage, vallées et petits hameaux, accessible aux marcheurs comme aux cyclistes.",
+    "conseils": [
+      "Son revêtement plat et régulier la rend accessible aux familles et aux vélos à assistance électrique."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "velo-francette",
+    "name": "La Vélo Francette",
+    "commune": "axe Pont-d'Ouilly – Clécy",
+    "category": "nature",
+    "lat": 48.875,
+    "lon": -0.440,
+    "description": "La Vélo Francette relie la Manche à l'Atlantique et traverse la Suisse Normande en longeant en partie la vallée de l'Orne. Le tronçon local alterne voies partagées à faible trafic et sections en site propre, au fil de paysages de gorges et de bocage.",
+    "conseils": [
+      "Vérifiez le balisage local avant de partir : l'itinéraire alterne route partagée et voie dédiée selon les tronçons."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "rochers-des-parcs",
+    "name": "Les rochers des Parcs",
+    "commune": "Clécy",
+    "category": "nature",
+    "lat": 48.895,
+    "lon": -0.484,
+    "description": "Ce site d'escalade sur rocher, l'un des plus fréquentés de l'ouest de la France, propose des voies de tous niveaux sur un granit compact dominant l'Orne. Il attire aussi bien les grimpeurs débutants que les pratiquants confirmés.",
+    "conseils": [
+      "De nombreuses voies conviennent à l'initiation, mais mieux vaut être accompagné d'un grimpeur expérimenté ou d'un moniteur pour une première sortie."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "fosse-arthour",
+    "name": "La Fosse Arthour",
+    "commune": "aux portes du Domfrontais",
+    "category": "nature",
+    "lat": 48.710,
+    "lon": -0.620,
+    "description": "Ce site rocheux original, façonné par les eaux, se distingue par ses formations de grès roses et ses petites cascades. Il marque une transition entre la Suisse Normande et le Domfrontais voisin.",
+    "conseils": [
+      "Site plus confidentiel que la Roche d'Oëtre : un bon choix pour une sortie plus tranquille."
+    ],
+    "verifie": false
+  },
+  {
+    "id": "mesnil-glaise",
+    "name": "Mesnil-Glaise et les méandres de l'Orne",
+    "commune": "vallée de l'Orne, secteur de Ménil-Hermei",
+    "category": "nature",
+    "lat": 48.790,
+    "lon": -0.365,
+    "description": "Dans ce secteur, l'Orne dessine une série de méandres resserrés entre des versants boisés, l'un des paysages fluviaux les plus intimes du territoire. Le site se prête à une balade tranquille, loin de l'affluence des lieux les plus connus.",
+    "conseils": [
+      "Un bon complément aux sites plus fréquentés, pour prolonger la découverte de la vallée de l'Orne."
+    ],
+    "verifie": false
+  }
+]
