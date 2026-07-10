@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bouger en Suisse Normande — randonnée, canoë, escalade, vélo</title>
+<meta name="description" content="Les activités de plein air de la Suisse Normande : canoë-kayak sur l'Orne, escalade, randonnée sur le GR de Pays, VTT, pêche, Vélo Francette et Voie Verte Flers–Domfront.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230f3327%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2242%22%20font-size%3D%2230%22%20text-anchor%3D%22middle%22%3E%F0%9F%8F%9E%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Bouger en Suisse Normande — randonnée, canoë, escalade, vélo">
+<meta property="og:description" content="Les activités de plein air de la Suisse Normande : canoë-kayak sur l'Orne, escalade, randonnée sur le GR de Pays, VTT, pêche, Vélo Francette et Voie Verte Flers–Domfront.">
+<meta property="og:site_name" content="Le Guide de la Suisse Normande">
+<style>
+  :root {
+    --fern-dark: #0f3327;
+    --fern: #1f4d3a;
+    --fern-light: #4b8267;
+    --granite: #565a52;
+    --granite-light: #8a8d82;
+    --river: #2f6f8e;
+    --river-light: #6fa9c4;
+    --amber: #a97a2e;
+    --amber-light: #c9994f;
+    --stone: #f3f4ee;
+    --paper: #ffffff;
+    --ink: #1b231d;
+    --ink-muted: #545f52;
+    --line: #dde1d5;
+    --radius: 10px;
+    --radius-lg: 18px;
+    --max: 1120px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--stone);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--river); }
+  a:hover, a:focus { color: var(--fern); }
+  img, svg { max-width: 100%; }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--fern-dark);
+    margin: 0 0 0.55em;
+  }
+  h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem); }
+  h2 { font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.05rem); }
+  h3 { font-size: 1.2rem; }
+  p { margin: 0 0 1em; }
+  ul { margin: 0; padding: 0; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 1.4rem; }
+  .section { padding: 4rem 0; }
+  .section + .section { border-top: 1px solid var(--line); }
+  .section-head { max-width: 680px; margin: 0 auto 2.5rem; text-align: center; }
+  .section-head p { color: var(--ink-muted); font-size: 1.03rem; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--river);
+    background: rgba(47,111,142,0.10);
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    margin-bottom: 0.9em;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.85em 1.6em;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.98rem;
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--fern); color: #fff; }
+  .btn-primary:hover { background: var(--fern-dark); color: #fff; box-shadow: 0 12px 26px -12px rgba(15,51,39,0.55); }
+  .btn-outline { background: transparent; color: var(--fern); border-color: var(--fern); }
+  .btn-outline:hover { background: var(--fern); color: #fff; }
+  .btn-ghost { background: rgba(255,255,255,0.14); color: #fff; border-color: rgba(255,255,255,0.5); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.24); color: #fff; }
+
+  /* ---- Navigation ---- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(243,244,238,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.12rem;
+    color: var(--fern-dark);
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 2.1rem; height: 2.1rem;
+    border-radius: 8px;
+    background: linear-gradient(155deg, var(--fern), var(--river));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .topnav { display: flex; flex-wrap: wrap; gap: 1.3rem; align-items: center; }
+  .topnav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid transparent;
+  }
+  .topnav a:hover { color: var(--fern); }
+  .topnav a.active { color: var(--fern); border-bottom-color: var(--amber); }
+
+  /* ---- Hero ---- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 55% at 90% 0%, rgba(111,169,196,0.35), transparent 60%),
+      radial-gradient(ellipse 55% 60% at 5% 100%, rgba(75,130,103,0.30), transparent 55%),
+      linear-gradient(160deg, var(--fern-dark), var(--fern) 60%, var(--fern-light) 140%);
+    color: #fff;
+  }
+  .hero .container { padding: 4.5rem 0 4rem; }
+  .hero .eyebrow { background: rgba(255,255,255,0.16); color: #fff; }
+  .hero h1 { color: #fff; max-width: 18ch; }
+  .hero .lede { font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); color: rgba(255,255,255,0.92); max-width: 58ch; margin-bottom: 1.8rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .hero-note { margin-top: 1.4rem; font-size: 0.86rem; color: rgba(255,255,255,0.72); }
+  .page-hero { padding: 3.2rem 0 2.6rem; }
+  .page-hero .lede { color: rgba(255,255,255,0.92); max-width: 68ch; margin-bottom: 0; }
+
+  /* ---- Cards génériques ---- */
+  .grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 720px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 1.7rem 1.6rem;
+    border: 1px solid var(--line);
+    box-shadow: 0 14px 28px -22px rgba(15,51,39,0.45);
+  }
+  .card .meta { font-size: 0.85rem; color: var(--river); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.6em; }
+  .card p:last-child { margin-bottom: 0; }
+  .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.25em 0.65em;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .badge-unverified { background: rgba(169,122,46,0.15); color: var(--amber); border: 1px solid rgba(169,122,46,0.35); }
+  .badge-exemple { background: rgba(47,111,142,0.12); color: var(--river); border: 1px solid rgba(47,111,142,0.3); }
+
+  .conseils {
+    margin-top: 0.9em;
+    padding-top: 0.9em;
+    border-top: 1px dashed var(--line);
+  }
+  .conseils strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--granite); margin-bottom: 0.4em; }
+  .conseils ul { list-style: none; }
+  .conseils li { position: relative; padding-left: 1.2em; font-size: 0.92rem; color: var(--ink-muted); margin-bottom: 0.35em; }
+  .conseils li::before { content: "→"; position: absolute; left: 0; color: var(--river); }
+
+  /* ---- Carte interactive ---- */
+  .map-wrap {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.4rem;
+    box-shadow: 0 20px 40px -28px rgba(15,51,39,0.5);
+  }
+  .map-svg { display: block; width: 100%; height: auto; border-radius: var(--radius); background: #eaf0e6; }
+  .map-river { fill: none; stroke: var(--river-light); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; opacity: 0.65; }
+  .map-place {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    fill: var(--granite);
+    letter-spacing: 0.02em;
+  }
+  .marker circle { stroke: #fff; stroke-width: 2; transition: r 0.15s ease; cursor: pointer; }
+  .marker:hover circle { r: 10; }
+  .marker-nature circle { fill: var(--fern); }
+  .marker-village circle { fill: var(--river); }
+  .marker-panorama circle { fill: var(--amber); }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 1.3rem; margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--ink-muted); }
+  .map-legend span { display: inline-flex; align-items: center; gap: 0.5em; }
+  .map-legend i { width: 0.85em; height: 0.85em; border-radius: 50%; display: inline-block; }
+  .map-caption { margin-top: 1rem; font-size: 0.88rem; color: var(--ink-muted); }
+
+  /* ---- Bannière pros ---- */
+  .pros-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    background: var(--paper);
+    border: 1px dashed var(--river-light);
+    border-radius: var(--radius-lg);
+    padding: 1.6rem 1.8rem;
+  }
+  .pros-banner p { margin: 0; color: var(--ink-muted); }
+  .pros-banner strong { color: var(--fern-dark); }
+
+  /* ---- Tarifs ---- */
+  .pricing-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1020px) { .pricing-grid { grid-template-columns: repeat(4, 1fr); } }
+  .price-card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 1.8rem 1.5rem;
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .price-card.featured { border-color: var(--amber); box-shadow: 0 18px 34px -18px rgba(169,122,46,0.45); position: relative; }
+  .price-card.featured::before {
+    content: "Le plus choisi";
+    position: absolute; top: -0.8em; left: 1.4rem;
+    background: var(--amber); color: #fff;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 0.3em 0.8em; border-radius: 999px;
+  }
+  .price-card h3 { font-size: 1.05rem; margin-bottom: 0.1em; }
+  .price-amount { font-size: 1.8rem; font-weight: 800; color: var(--fern-dark); font-family: var(--serif); }
+  .price-amount small { font-size: 0.9rem; font-weight: 600; color: var(--ink-muted); font-family: var(--sans); }
+  .price-card p.price-desc { color: var(--ink-muted); font-size: 0.92rem; flex-grow: 1; }
+
+  /* ---- Annuaire dormir & manger ---- */
+  .pro-card-lg {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    padding: 2rem;
+    box-shadow: 0 20px 38px -26px rgba(15,51,39,0.5);
+  }
+  .pro-card-lg .type-tag, .pro-card-md .type-tag {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--river); background: rgba(47,111,142,0.1);
+    padding: 0.25em 0.7em; border-radius: 999px; margin-bottom: 0.7em;
+  }
+  .pro-card-md {
+    background: var(--paper);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    padding: 1.5rem 1.6rem;
+  }
+  .pro-list { list-style: none; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
+  .pro-list li {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem;
+    padding: 0.85rem 1.3rem; border-bottom: 1px solid var(--line); font-size: 0.94rem;
+  }
+  .pro-list li:last-child { border-bottom: none; }
+  .pro-list .pro-name { font-weight: 700; color: var(--ink); }
+  .pro-list .pro-meta { color: var(--ink-muted); font-size: 0.88rem; }
+
+  /* ---- FAQ / arguments ---- */
+  .argu-grid { display: grid; gap: 1.6rem; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .argu-grid { grid-template-columns: repeat(3, 1fr); } }
+  .argu-card .num { font-family: var(--serif); font-size: 1.9rem; color: var(--amber); margin-bottom: 0.3em; }
+
+  /* ---- Cross-sell ---- */
+  .crosssell-grid { display: grid; gap: 1.4rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .crosssell-grid { grid-template-columns: repeat(3, 1fr); } }
+  .crosssell-card { display: block; text-decoration: none; color: inherit; }
+  .crosssell-card .card { height: 100%; }
+  .crosssell-card h3 { color: var(--fern-dark); }
+  .crosssell-card .go { color: var(--river); font-weight: 700; font-size: 0.9rem; }
+
+  /* ---- Contact ---- */
+  .contact-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: grid;
+    gap: 1.3rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) { .contact-card { grid-template-columns: 1fr 1fr; } }
+  .contact-card strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--granite); margin-bottom: 0.3em; }
+  .contact-card a { font-weight: 700; font-size: 1.02rem; text-decoration: none; }
+  .placeholder-tag {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    background: var(--amber); color: #fff;
+    padding: 0.15em 0.55em; border-radius: 5px; margin-left: 0.5em; vertical-align: middle;
+  }
+
+  /* ---- Pied de page ---- */
+  .site-footer { background: var(--fern-dark); color: rgba(255,255,255,0.78); padding: 2.75rem 0 2rem; }
+  .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+  .footer-brand { max-width: 360px; }
+  .footer-brand .brand { color: #fff; margin-bottom: 0.6em; }
+  .footer-brand p { color: rgba(255,255,255,0.62); font-size: 0.9rem; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 2.5rem; }
+  .footer-links h4 { font-family: var(--sans); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.85); margin-bottom: 0.8em; }
+  .footer-links ul { display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.9rem; }
+  .footer-links a:hover { color: #fff; }
+  .footer-legal { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 1.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+  .footer-legal p { margin-bottom: 0.4em; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">🏞️</span>
+      Le Guide de la Suisse Normande
+    </a>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="decouvrir.html">Découvrir</a>
+      <a href="bouger.html" class="active">Bouger</a>
+      <a href="dormir-manger.html">Dormir &amp; manger</a>
+      <a href="pros.html">Côté pros</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero page-hero">
+    <div class="container">
+      <p class="eyebrow">Bouger</p>
+      <h1>Les activités de plein air du territoire</h1>
+      <p class="lede">Le relief de la Suisse Normande, rare en Normandie, permet une palette d'activités inhabituelle pour la région : eau vive, escalade sur granit, vol libre et un réseau de sentiers et de voies cyclables qui relient les principaux sites.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-head">
+            <h3>Canoë-kayak sur l'Orne</h3>
+            
+          </div>
+          <p class="meta">Pont-d'Ouilly, Clécy · d'avril à octobre</p>
+          <p>Entre Pont-d'Ouilly et Clécy, l'Orne offre un parcours accessible pour découvrir les gorges et les rochers depuis l'eau. Plusieurs bases nautiques locales proposent la location de canoës et de kayaks, avec des parcours adaptés aux familles comme aux pagayeurs plus aguerris.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Escalade</h3>
+            
+          </div>
+          <p class="meta">Clécy et alentours · toute l'année, hors épisodes de gel</p>
+          <p>La Suisse Normande concentre plusieurs sites d'escalade réputés, au premier rang desquels les rochers des Parcs à Clécy. Le granit local, compact et bien pourvu en prises naturelles, attire grimpeurs débutants et confirmés sur des voies de tous niveaux.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Parapente</h3>
+            <span class="badge badge-unverified">Informations à confirmer sur place</span>
+          </div>
+          <p class="meta">secteur de la Roche d'Oëtre · variable selon les conditions météorologiques</p>
+          <p>Le relief accidenté de la Suisse Normande, rare en Normandie, permet la pratique du vol libre depuis certains points hauts du territoire, notamment autour de la Roche d'Oëtre. La pratique dépend fortement des conditions de vent et de la présence d'un site de décollage aménagé.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Randonnée pédestre</h3>
+            
+          </div>
+          <p class="meta">ensemble du territoire · toute l'année</p>
+          <p>Le territoire est traversé par un GR de Pays qui relie les principaux sites naturels, complété par de nombreuses boucles locales balisées à travers gorges, bocage et vallées encaissées. De quoi composer des itinéraires d'une heure à plusieurs jours.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>VTT</h3>
+            
+          </div>
+          <p class="meta">ensemble du territoire · toute l'année, selon météo</p>
+          <p>Les reliefs et les sentiers boisés de la Suisse Normande en font un terrain apprécié des vététistes, avec des parcours qui alternent chemins techniques dans les gorges et itinéraires plus roulants en bocage.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Pêche</h3>
+            
+          </div>
+          <p class="meta">l'Orne et la Rouvre · selon l'ouverture de la pêche en eau douce</p>
+          <p>L'Orne et la Rouvre, classées en majorité en rivières de première catégorie, sont fréquentées par les pêcheurs pour la truite et d'autres espèces d'eau vive. Plusieurs postes sont accessibles directement depuis les berges.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Vélo Francette</h3>
+            
+          </div>
+          <p class="meta">axe Pont-d'Ouilly – Clécy et au-delà · d'avril à octobre principalement</p>
+          <p>Cette véloroute nationale qui relie la Manche à l'Atlantique traverse la Suisse Normande en suivant en partie la vallée de l'Orne, offrant une manière tranquille de découvrir le territoire à vélo, par étapes.</p>
+        </article>
+        <article class="card">
+          <div class="card-head">
+            <h3>Voie Verte Flers–Domfront</h3>
+            
+          </div>
+          <p class="meta">de Flers à Domfront · toute l'année</p>
+          <p>Sur le tracé d'une ancienne voie ferrée, cette voie verte offre un parcours plat et sécurisé entre Flers et Domfront, à l'écart de la circulation, accessible aux marcheurs, cyclistes et familles.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">🏞️</span>
+          Le Guide de la Suisse Normande
+        </a>
+        <p>Guide indépendant, écrit et vérifié sur le terrain par un habitant d'Athis-Val-de-Rouvre, au cœur de la Suisse Normande.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Le guide</h4>
+          <ul>
+            <li><a href="decouvrir.html">Découvrir</a></li>
+            <li><a href="bouger.html">Bouger</a></li>
+            <li><a href="dormir-manger.html">Dormir &amp; manger</a></li>
+            <li><a href="pros.html">Côté pros</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Autres activités</h4>
+          <ul>
+            <li><a href="../agency/index.html">Bocage Web — sites internet</a></li>
+            <li><a href="../redaction/index.html">Mots d'Orne — rédaction SEO</a></li>
+            <li><a href="../etoiles/index.html">La Carte de Votre Ciel</a></li>
+            <li><a href="index.html">Le Guide de la Suisse Normande</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p><strong>Mentions légales</strong> — Le Guide de la Suisse Normande, entreprise individuelle (micro-entreprise) en cours d'immatriculation. Adresse&nbsp;: à compléter, Athis-Val-de-Rouvre (61430). SIRET&nbsp;: à compléter dès l'immatriculation. Directeur de la publication&nbsp;: à compléter. Hébergement&nbsp;: à compléter lors de la mise en ligne.</p>
+      <p>© 2026 Le Guide de la Suisse Normande. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

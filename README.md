@@ -1,6 +1,6 @@
 # Objectif 40 000 € en 6 mois — trois pistes, un dépôt
 
-Ce dépôt contient **quatre activités complémentaires**, chacune avec son outil
+Ce dépôt contient **cinq activités complémentaires**, chacune avec son outil
 et son plan d'affaires. Elles partagent la même clientèle et se renforcent
 mutuellement (un client site devient client contenu, les articles SEO font
 vivre la boutique de cartes du ciel, le guide du territoire apporte des
@@ -12,6 +12,7 @@ prospects à toutes les autres, etc.).
 | 2. Rédaction web | Passer des articles « au mot » aux abonnements de contenu SEO | [`redaction/index.html`](./redaction/index.html) (offre), [`redaction/studio.html`](./redaction/studio.html) (Studio SEO privé) | [`PLAN-REDACTION.md`](./PLAN-REDACTION.md) |
 | 3. Cartes du ciel | Produit cadeau : l'affiche du vrai ciel d'une nuit précise | [`etoiles/index.html`](./etoiles/index.html) (générateur, `node etoiles/build.js` pour régénérer) | [`PLAN-ETOILES.md`](./PLAN-ETOILES.md) |
 | 4. Guide du territoire | Le guide de référence de la Suisse Normande, annuaire payant pour les pros du tourisme | [`territoire/index.html`](./territoire/index.html) (guide), [`territoire/pros.html`](./territoire/pros.html) (offre pros), `node territoire/build.js` pour régénérer | [`PLAN-TERRITOIRE.md`](./PLAN-TERRITOIRE.md) |
+| 5. Atelier Plume | Écriture sur mesure sur Etsy : poèmes, gazettes d'époque, livrets biographiques | [`atelier/poeme.html`](./atelier/poeme.html), [`atelier/gazette.html`](./atelier/gazette.html), [`atelier/livret.html`](./atelier/livret.html), [`atelier/questionnaire.html`](./atelier/questionnaire.html) | [`PLAN-ATELIER.md`](./PLAN-ATELIER.md) |
 
 La piste 2 s'appuie sur l'activité existante de micro-entrepreneur en
 rédaction web (rien à créer administrativement). La piste 3 est la plus
@@ -247,8 +248,13 @@ ligne, personnaliser :
 │   ├── test-astro.js           # Vérifications astronomiques
 │   ├── README.md               # Doc dédiée (rebuild, données, impression)
 │   └── data/                   # Catalogue d'étoiles + constellations (CC BY-SA)
-└── territoire/
-    ├── build.js                # Générateur du guide (zéro dépendance)
-    ├── data/                   # Lieux, activités, annuaire pros (JSON)
-    └── *.html                  # Pages générées (index, découvrir, bouger, dormir-manger, pros)
+├── territoire/
+│   ├── build.js                # Générateur du guide (zéro dépendance)
+│   ├── data/                   # Lieux, activités, annuaire pros (JSON)
+│   └── *.html                  # Pages générées (index, découvrir, bouger, dormir-manger, pros)
+└── atelier/
+    ├── poeme.html              # Affiche de poème (acrostiche), export SVG/PNG
+    ├── gazette.html            # Une de journal d'époque, export PDF (impression)
+    ├── livret.html             # Livret biographique A5, export PDF (impression)
+    └── questionnaire.html      # Questionnaire client -> brief prêt à coller
 ```

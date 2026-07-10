@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'Atelier Plume — Questionnaire de commande</title>
+<meta name="description" content="Racontez-nous la personne : ce questionnaire sert à écrire votre texte sur mesure (poème, gazette ou livret).">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; background:#f7f2e8; color:#2b2620; line-height:1.55; }
+  .wrap { max-width:680px; margin:0 auto; padding:36px 20px 60px; }
+  h1 { font-size:1.7rem; font-weight:normal; letter-spacing:.04em; }
+  .lede { color:#5a5045; margin:10px 0 26px; font-style:italic; }
+  fieldset { border:1px solid #c9bda5; border-radius:8px; padding:16px; margin-bottom:18px; background:#fffdf8; }
+  legend { padding:0 8px; font-size:.8rem; text-transform:uppercase; letter-spacing:.12em; color:#8a5a2b; }
+  label { display:block; font-size:.85rem; margin:10px 0 4px; color:#5a5045; }
+  input[type=text], textarea, select { width:100%; padding:9px 11px; border:1px solid #c9bda5; border-radius:4px; background:#fff; font:inherit; font-size:.92rem; }
+  textarea { resize:vertical; }
+  .radio-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }
+  .radio-row label { display:flex; align-items:center; gap:6px; margin:0; font-size:.9rem; color:#2b2620; cursor:pointer; }
+  button { padding:12px 18px; font:inherit; font-size:.95rem; border-radius:4px; border:1px solid #2b2620; cursor:pointer; background:#2b2620; color:#f0e9dc; margin-top:8px; }
+  #brief-zone { display:none; margin-top:22px; }
+  #brief { width:100%; min-height:260px; font-family:ui-monospace, 'Courier New', monospace; font-size:.8rem; padding:12px; border:1px solid #c9bda5; border-radius:6px; background:#fff; }
+  .note { font-size:.78rem; color:#7a6f60; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Racontez-nous la personne</h1>
+  <p class="lede">Plus vous nous en direz, plus le texte sera juste. Comptez cinq minutes — et ne vous inquiétez pas du style : raconter suffit, écrire, c'est notre métier.</p>
+
+  <fieldset>
+    <legend>Votre commande</legend>
+    <label>Produit commandé</label>
+    <div class="radio-row">
+      <label><input type="radio" name="produit" value="Le Poème de Votre Vie" checked> Poème</label>
+      <label><input type="radio" name="produit" value="La Gazette de Votre Vie"> Gazette</label>
+      <label><input type="radio" name="produit" value="Le Livret d'une Vie"> Livret</label>
+    </div>
+    <label for="q-occasion">L'occasion</label>
+    <select id="q-occasion">
+      <option>Naissance</option><option>Mariage</option><option>Anniversaire</option>
+      <option>Retraite</option><option>Anniversaire de rencontre / de mariage</option>
+      <option>Fête des mères / des pères</option><option>Autre (précisez dans les anecdotes)</option>
+    </select>
+    <label for="q-numero">Numéro de commande Etsy (si vous l'avez sous la main)</label>
+    <input type="text" id="q-numero" placeholder="ex. 3245678901">
+  </fieldset>
+
+  <fieldset>
+    <legend>La personne (ou le couple) à qui le texte est destiné</legend>
+    <label for="q-prenoms">Prénom(s) — pour un poème acrostiche, l'orthographe exacte compte</label>
+    <input type="text" id="q-prenoms" placeholder="ex. Camille">
+    <label for="q-dates">Date(s) et lieu(x) importants</label>
+    <input type="text" id="q-dates" placeholder="ex. née le 14 février 2024 à Flers">
+    <label for="q-liens">Qui offre, et quel est votre lien avec la personne ?</label>
+    <input type="text" id="q-liens" placeholder="ex. ses parents ; sa petite-fille Léa…">
+  </fieldset>
+
+  <fieldset>
+    <legend>La matière première</legend>
+    <label for="q-anecdotes">3 à 6 anecdotes, souvenirs, détails vrais (les surnoms, les manies, la chanson qu'elle fredonne, le plat mythique, la phrase qu'il répète…)</label>
+    <textarea id="q-anecdotes" rows="8" placeholder="Une anecdote par ligne. Les détails concrets font les plus beaux textes."></textarea>
+    <label for="q-ton">Le ton souhaité</label>
+    <select id="q-ton">
+      <option>Tendre et poétique</option><option>Drôle et complice</option>
+      <option>Solennel et émouvant</option><option>Mélange : tendre avec des touches d'humour</option>
+    </select>
+    <label for="q-interdits">Sujets à éviter absolument (facultatif mais précieux)</label>
+    <input type="text" id="q-interdits" placeholder="ex. ne pas mentionner…">
+  </fieldset>
+
+  <button id="go">Générer mon brief à envoyer</button>
+  <div id="brief-zone">
+    <label for="brief">Votre brief — copiez-le et envoyez-le en message Etsy :</label>
+    <textarea id="brief" readonly></textarea>
+    <button id="copy">Copier le brief</button>
+    <p class="note">Aucune donnée n'est envoyée ni enregistrée par cette page : le brief n'existe que dans votre navigateur jusqu'à ce que vous nous l'envoyiez.</p>
+  </div>
+</div>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+$('go').addEventListener('click', () => {
+  const produit = document.querySelector('input[name=produit]:checked').value;
+  const brief = [
+    '=== BRIEF — L\'ATELIER PLUME ===',
+    'Produit : ' + produit,
+    'Occasion : ' + $('q-occasion').value,
+    'Commande Etsy : ' + ($('q-numero').value || '—'),
+    '',
+    'Prénom(s) : ' + $('q-prenoms').value,
+    'Dates/lieux : ' + $('q-dates').value,
+    'Offert par : ' + $('q-liens').value,
+    'Ton : ' + $('q-ton').value,
+    'À éviter : ' + ($('q-interdits').value || '—'),
+    '',
+    'Anecdotes :',
+    ...$('q-anecdotes').value.split('\n').filter(l => l.trim()).map(l => '- ' + l.trim())
+  ].join('\n');
+  $('brief').value = brief;
+  $('brief-zone').style.display = 'block';
+  $('brief').style.height = 'auto';
+  $('brief').style.height = $('brief').scrollHeight + 20 + 'px';
+});
+$('copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('brief').value); }
+  catch { $('brief').select(); document.execCommand('copy'); }
+  $('copy').textContent = 'Copié !';
+  setTimeout(() => { $('copy').textContent = 'Copier le brief'; }, 2000);
+});
+</script>
+</body>
+</html>

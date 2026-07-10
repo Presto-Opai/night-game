@@ -81,7 +81,7 @@
             margin: 0 auto;
             padding: 0 1.5rem 3rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
             gap: 2rem;
         }
 
@@ -219,7 +219,7 @@
 <body>
     <header>
         <h1>Tableau de bord — Objectif 40 000 €</h1>
-        <p class="intro">Accès rapide aux trois pistes de développement.</p>
+        <p class="intro">Accès rapide aux cinq pistes de développement.</p>
     </header>
 
     <div class="container">
@@ -257,6 +257,34 @@
             </div>
             <p class="card-links-section">
                 <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN-ETOILES.md">Consulter le plan</a>
+            </p>
+            <span class="card-status">Prêt à vendre</span>
+        </div>
+
+        <div class="card">
+            <h2>Piste 4 — Le Guide de la Suisse Normande</h2>
+            <p class="card-description">Guide du territoire : l'actif local qui alimente toutes les autres pistes — annuaire payant pour gîtes et restaurants.</p>
+            <div class="card-links">
+                <a href="territoire/index.html" class="btn">Le guide</a>
+                <a href="territoire/pros.html" class="btn btn-secondary">Offre pros</a>
+            </div>
+            <p class="card-links-section">
+                <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN-TERRITOIRE.md">Consulter le plan</a>
+            </p>
+            <span class="card-status">Prêt à vendre</span>
+        </div>
+
+        <div class="card">
+            <h2>Piste 5 — L'Atelier Plume</h2>
+            <p class="card-description">Écriture sur mesure vendue sur Etsy&#160;: poèmes acrostiches, gazettes d'époque et livrets biographiques, mis en page en dix minutes.</p>
+            <div class="card-links">
+                <a href="atelier/poeme.html" class="btn">Affiche de poème</a>
+                <a href="atelier/gazette.html" class="btn btn-secondary">La Gazette</a>
+                <a href="atelier/livret.html" class="btn btn-secondary">Le Livret</a>
+                <a href="atelier/questionnaire.html" class="btn btn-secondary">Questionnaire client</a>
+            </div>
+            <p class="card-links-section">
+                <a href="https://github.com/Presto-Opai/night-game/blob/main/PLAN-ATELIER.md">Consulter le plan</a>
             </p>
             <span class="card-status">Prêt à vendre</span>
         </div>

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "canoe-kayak",
+    "name": "Canoë-kayak sur l'Orne",
+    "description": "Entre Pont-d'Ouilly et Clécy, l'Orne offre un parcours accessible pour découvrir les gorges et les rochers depuis l'eau. Plusieurs bases nautiques locales proposent la location de canoës et de kayaks, avec des parcours adaptés aux familles comme aux pagayeurs plus aguerris.",
+    "où": "Pont-d'Ouilly, Clécy",
+    "saison": "d'avril à octobre",
+    "verifie": true
+  },
+  {
+    "id": "escalade",
+    "name": "Escalade",
+    "description": "La Suisse Normande concentre plusieurs sites d'escalade réputés, au premier rang desquels les rochers des Parcs à Clécy. Le granit local, compact et bien pourvu en prises naturelles, attire grimpeurs débutants et confirmés sur des voies de tous niveaux.",
+    "où": "Clécy et alentours",
+    "saison": "toute l'année, hors épisodes de gel",
+    "verifie": true
+  },
+  {
+    "id": "parapente",
+    "name": "Parapente",
+    "description": "Le relief accidenté de la Suisse Normande, rare en Normandie, permet la pratique du vol libre depuis certains points hauts du territoire, notamment autour de la Roche d'Oëtre. La pratique dépend fortement des conditions de vent et de la présence d'un site de décollage aménagé.",
+    "où": "secteur de la Roche d'Oëtre",
+    "saison": "variable selon les conditions météorologiques",
+    "verifie": false
+  },
+  {
+    "id": "randonnee",
+    "name": "Randonnée pédestre",
+    "description": "Le territoire est traversé par un GR de Pays qui relie les principaux sites naturels, complété par de nombreuses boucles locales balisées à travers gorges, bocage et vallées encaissées. De quoi composer des itinéraires d'une heure à plusieurs jours.",
+    "où": "ensemble du territoire",
+    "saison": "toute l'année",
+    "verifie": true
+  },
+  {
+    "id": "vtt",
+    "name": "VTT",
+    "description": "Les reliefs et les sentiers boisés de la Suisse Normande en font un terrain apprécié des vététistes, avec des parcours qui alternent chemins techniques dans les gorges et itinéraires plus roulants en bocage.",
+    "où": "ensemble du territoire",
+    "saison": "toute l'année, selon météo",
+    "verifie": true
+  },
+  {
+    "id": "peche",
+    "name": "Pêche",
+    "description": "L'Orne et la Rouvre, classées en majorité en rivières de première catégorie, sont fréquentées par les pêcheurs pour la truite et d'autres espèces d'eau vive. Plusieurs postes sont accessibles directement depuis les berges.",
+    "où": "l'Orne et la Rouvre",
+    "saison": "selon l'ouverture de la pêche en eau douce",
+    "verifie": true
+  },
+  {
+    "id": "velo-francette-activite",
+    "name": "Vélo Francette",
+    "description": "Cette véloroute nationale qui relie la Manche à l'Atlantique traverse la Suisse Normande en suivant en partie la vallée de l'Orne, offrant une manière tranquille de découvrir le territoire à vélo, par étapes.",
+    "où": "axe Pont-d'Ouilly – Clécy et au-delà",
+    "saison": "d'avril à octobre principalement",
+    "verifie": true
+  },
+  {
+    "id": "voie-verte-activite",
+    "name": "Voie Verte Flers–Domfront",
+    "description": "Sur le tracé d'une ancienne voie ferrée, cette voie verte offre un parcours plat et sécurisé entre Flers et Domfront, à l'écart de la circulation, accessible aux marcheurs, cyclistes et familles.",
+    "où": "de Flers à Domfront",
+    "saison": "toute l'année",
+    "verifie": true
+  }
+]
